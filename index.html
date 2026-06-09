@@ -4,623 +4,1442 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fikrado Electronics — Premium Tech Store</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#07080a;color:#e8edf5;line-height:1.6;overflow-x:hidden}
-        a{text-decoration:none;color:inherit}
-        img{max-width:100%;display:block}
-        ::-webkit-scrollbar{width:8px}
-        ::-webkit-scrollbar-track{background:#07080a}
-        ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#00d4ff,#7b2ff7);border-radius:10px}
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #07080a;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
 
-        .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:2rem}
-        .hero::before{content:'';position:absolute;inset:0;background:url('https://i.ibb.co/JTS5kPy/8b4200b4a1aec680c822e850cf100648.jpg')center/cover no-repeat fixed;filter:brightness(0.3)blur(4px)saturate(1.1);transform:scale(1.1);z-index:0;animation:zoomBg 25s ease-in-out infinite alternate}
-        @keyframes zoomBg{0%{transform:scale(1.0)}100%{transform:scale(1.2)}}
-        .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0.2)0%,rgba(7,8,10,0.85)100%);z-index:1}
-        .hero-content{position:relative;z-index:2;text-align:center;max-width:900px;animation:fadeInUp 1.2s ease-out}
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0c0e14; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #00d4ff, #7b2ff7); border-radius: 3px; }
 
-        .navbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;background:transparent;backdrop-filter:blur(20px);transition:all 0.4s ease}
-        .navbar.scrolled{padding:0.7rem 2rem;background:rgba(7,8,10,0.92);border-bottom:1px solid rgba(0,212,255,0.1);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
-        .nav-logo{display:flex;align-items:center;gap:0.6rem;font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#00d4ff,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .nav-logo svg{width:28px;height:28px;filter:drop-shadow(0 0 8px rgba(0,212,255,0.3))}
-        .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
-        .nav-links a{color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:500;transition:all 0.3s ease;position:relative;padding:0.3rem 0}
-        .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,#00d4ff,#7b2ff7);transition:width 0.3s ease;border-radius:2px}
-        .nav-links a:hover{color:#fff}
-        .nav-links a:hover::after{width:100%}
-        .nav-auth-btn{padding:0.5rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#00d4ff,#7b2ff7);color:#fff!important;font-weight:600;border:none;cursor:pointer;transition:all 0.3s ease;font-size:0.85rem;box-shadow:0 4px 15px rgba(0,212,255,0.2)}
-        .nav-auth-btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,212,255,0.4)}
-        .nav-auth-btn::after{display:none!important}
-        .nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:0.3rem}
-        @media(max-width:768px){
-            .navbar{padding:1rem 1.2rem}
-            .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(7,8,10,0.98);padding:1.5rem;gap:1.2rem;border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px)}
-            .nav-links.open{display:flex;animation:fadeIn 0.3s ease}
-            .nav-toggle{display:block}
+        /* ===== LANGUAGE SELECTOR TOP BAR ===== */
+        .lang-bar {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0.4rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1001;
+            flex-wrap: wrap;
+        }
+        .lang-bar span { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.6);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background: linear-gradient(135deg, #00d4ff22, #7b2ff722);
+            border-color: #00d4ff44;
+            color: #fff;
+        }
+        .lang-btn.active {
+            background: linear-gradient(135deg, #00d4ff33, #7b2ff733);
+            border-color: #00d4ff;
+            box-shadow: 0 0 12px rgba(0,212,255,0.15);
         }
 
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
-        @keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
-        @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-        @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-        @keyframes rotateGlow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-        @keyframes typing{from{width:0}to{width:100%}}
-        @keyframes blink{50%{border-color:transparent}}
-        @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-        @keyframes particleFloat{0%{transform:translateY(100vh)rotate(0deg);opacity:0}10%{opacity:0.6}90%{opacity:0.6}100%{transform:translateY(-10vh)rotate(720deg);opacity:0}}
-        @keyframes ripple{0%{box-shadow:0 0 0 0 rgba(0,212,255,0.4)}100%{box-shadow:0 0 0 20px rgba(0,212,255,0)}}
+        /* ===== NAVBAR ===== */
+        #navbar {
+            position: fixed;
+            top: 38px; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        #navbar.scrolled {
+            background: rgba(7,8,10,0.88);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-        .reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
-        .reveal.visible{opacity:1;transform:translateY(0)}
-        .reveal-left{opacity:0;transform:translateX(-60px);transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
-        .reveal-left.visible{opacity:1;transform:translateX(0)}
-        .reveal-right{opacity:0;transform:translateX(60px);transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
-        .reveal-right.visible{opacity:1;transform:translateX(0)}
-        .reveal-scale{opacity:0;transform:scale(0.85);transition:all 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
-        .reveal-scale.visible{opacity:1;transform:scale(1)}
-        .stagger-1{transition-delay:0.1s}
-        .stagger-2{transition-delay:0.2s}
-        .stagger-3{transition-delay:0.3s}
-        .stagger-4{transition-delay:0.4s}
+        /* ===== SEARCH BAR (in nav) ===== */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .search-box:focus-within {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0,212,255,0.08);
+            background: rgba(255,255,255,0.08);
+        }
+        .search-box input {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 0.8rem;
+            outline: none;
+            width: 120px;
+            font-family: inherit;
+        }
+        .search-box input::placeholder { color: rgba(255,255,255,0.3); }
+        .search-box button {
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            border: none;
+            color: #fff;
+            padding: 0.35rem 0.7rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .search-box button:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(0,212,255,0.2); }
 
-        .hero-title{font-size:clamp(2.5rem,7vw,5rem);font-weight:800;margin-bottom:0.5rem;background:linear-gradient(135deg,#00d4ff,#7b2ff7,#ff6bcb,#00d4ff);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 5s ease-in-out infinite,gradientShift 8s ease infinite;letter-spacing:-1px;line-height:1.1}
-        .hero-subtitle{font-size:clamp(1rem,2.5vw,1.5rem);color:rgba(255,255,255,0.7);margin-bottom:1rem;font-weight:300}
-        .typing-wrapper{display:flex;justify-content:center;margin-bottom:1.5rem}
-        .typing-text{overflow:hidden;white-space:nowrap;border-right:3px solid #00d4ff;animation:typing 3.5s steps(40)0.5s forwards,blink 0.75s step-end infinite;width:0;font-size:clamp(1rem,1.8vw,1.3rem);color:#00d4ff;font-weight:500}
-        .hero-description{font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:650px;margin:0 auto 2.5rem;line-height:1.8}
-        .hero-badge{display:inline-block;padding:0.4rem 1.2rem;border-radius:50px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);font-size:0.8rem;color:#00d4ff;margin-bottom:1.5rem;animation:pulse 2s ease-in-out infinite}
-        .btn-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-        .btn{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.2rem;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);border:none;position:relative;overflow:hidden}
-        .btn::before{content:'';position:absolute;inset:0;border-radius:50px;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:transform 0.6s ease}
-        .btn:hover::before{transform:translateX(100%)}
-        .btn-primary{background:linear-gradient(135deg,#00d4ff,#7b2ff7);color:#fff;box-shadow:0 4px 25px rgba(0,212,255,0.25);animation:ripple 2s ease-in-out infinite}
-        .btn-primary:hover{transform:translateY(-3px)scale(1.02);box-shadow:0 8px 40px rgba(0,212,255,0.4)}
-        .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.2)}
-        .btn-outline:hover{border-color:#00d4ff;background:rgba(0,212,255,0.08);transform:translateY(-3px);box-shadow:0 0 30px rgba(0,212,255,0.1)}
+        .btn-signin {
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-signin:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,212,255,0.25); }
 
-        .social-section{padding:6rem 2rem;background:linear-gradient(180deg,#07080a,#0c0e14,#07080a);position:relative}
-        .section-title{text-align:center;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:0.5rem;background:linear-gradient(135deg,#00d4ff,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .section-subtitle{text-align:center;color:rgba(255,255,255,0.5);margin-bottom:3.5rem;font-size:1.05rem}
-        .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
-        .social-card{background:rgba(255,255,255,0.03);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:2.5rem 2rem;text-align:center;transition:all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;overflow:hidden}
-        .social-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(0,212,255,0.08),transparent,rgba(123,47,247,0.08),transparent);animation:rotateGlow 8s linear infinite;opacity:0;transition:opacity 0.5s ease}
-        .social-card:hover::before{opacity:1}
-        .social-card:hover{transform:translateY(-10px);border-color:rgba(0,212,255,0.2);box-shadow:0 20px 60px rgba(0,212,255,0.08);background:rgba(255,255,255,0.06)}
-        .social-card-inner{position:relative;z-index:1}
-        .social-icon{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;transition:all 0.5s ease}
-        .social-card:hover .social-icon{transform:scale(1.1)rotate(5deg)}
-        .icon-instagram{background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af)}
-        .icon-facebook{background:linear-gradient(135deg,#1877f2,#0c5fbf)}
-        .social-card h3{font-size:1.3rem;margin-bottom:0.4rem}
-        .social-card .social-username{color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:1.5rem}
-        .social-link{display:inline-flex;align-items:center;gap:0.5rem;color:#00d4ff;font-weight:600;transition:all 0.3s ease;font-size:0.95rem}
-        .social-link:hover{gap:1rem;color:#7b2ff7}
-        .social-link svg{width:18px;height:18px;transition:transform 0.3s ease}
-        .social-link:hover svg{transform:translateX(4px)}
+        /* ===== ADMIN BUTTONS ===== */
+        .admin-bar {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .admin-btn {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .admin-btn:hover { background: linear-gradient(135deg, #00d4ff33, #7b2ff733); border-color: #00d4ff44; transform: translateX(-4px); }
+        .admin-btn.add { border-left: 3px solid #00d4ff; }
+        .admin-btn.update { border-left: 3px solid #7b2ff7; }
 
-        .features-section{padding:6rem 2rem;background:#0a0c12}
-        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.8rem;max-width:1100px;margin:0 auto}
-        .feature-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2.2rem 1.8rem;text-align:center;transition:all 0.5s ease;position:relative;overflow:hidden}
-        .feature-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00d4ff,#7b2ff7,transparent);transform:scaleX(0);transition:transform 0.5s ease}
-        .feature-item:hover::after{transform:scaleX(1)}
-        .feature-item:hover{background:rgba(255,255,255,0.04);transform:translateY(-6px);border-color:rgba(0,212,255,0.12);box-shadow:0 10px 40px rgba(0,0,0,0.2)}
-        .feature-icon{font-size:2.8rem;margin-bottom:1rem;display:block}
-        .feature-item h4{font-size:1.15rem;margin-bottom:0.5rem}
-        .feature-item p{color:rgba(255,255,255,0.5);font-size:0.92rem;line-height:1.6}
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(0,212,255,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(123,47,247,0.06) 0%, transparent 50%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+        @keyframes bgShift { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,-20px)} }
+        .hero-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(0,212,255,0.08);
+            border: 1px solid rgba(0,212,255,0.15);
+            color: #00d4ff;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7, #ff2d95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.5);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; }
+        .hero-actions .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: #fff;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .hero-actions .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,212,255,0.25); }
+        .hero-actions .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .hero-actions .btn-secondary:hover { border-color: #00d4ff44; background: rgba(0,212,255,0.05); transform: translateY(-3px); }
 
-        .testimonials-section{padding:6rem 2rem;background:#07080a}
-        .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
-        .testimonial-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2rem;transition:all 0.4s ease;position:relative}
-        .testimonial-card::before{content:'"';position:absolute;top:0.5rem;left:1.2rem;font-size:3rem;color:rgba(0,212,255,0.1);font-family:Georgia,serif;line-height:1}
-        .testimonial-card:hover{background:rgba(255,255,255,0.05);transform:translateY(-4px);border-color:rgba(0,212,255,0.15)}
-        .testimonial-stars{color:#ffd700;margin-bottom:1rem;font-size:1.1rem;letter-spacing:2px}
-        .testimonial-card blockquote{color:rgba(255,255,255,0.7);font-style:italic;line-height:1.7;margin-bottom:1.5rem;font-size:0.95rem}
-        .testimonial-author{display:flex;align-items:center;gap:0.8rem}
-        .testimonial-author img{width:40px;height:40px;border-radius:50%;border:2px solid rgba(0,212,255,0.2);object-fit:cover}
-        .testimonial-author strong{font-size:0.95rem}
-        .testimonial-author span{color:rgba(255,255,255,0.4);font-size:0.8rem}
+        /* ===== SECTION BASE ===== */
+        section { padding: 5rem 2rem; position: relative; }
+        .section-label {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            background: rgba(0,212,255,0.06);
+            border: 1px solid rgba(0,212,255,0.1);
+            color: #00d4ff;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+        }
+        .section-sub {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.95rem;
+            max-width: 500px;
+        }
 
-        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);z-index:1000;display:none;align-items:center;justify-content:center;animation:fadeIn 0.3s ease}
-        .modal-overlay.active{display:flex}
-        .modal-box{background:#12141c;border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:3rem 2.5rem 2.5rem;max-width:420px;width:92%;text-align:center;animation:fadeInUp 0.5s ease;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.5)}
-        .modal-box h2{font-size:1.6rem;margin-bottom:0.4rem;background:linear-gradient(135deg,#00d4ff,#7b2ff7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .modal-box .modal-sub{color:rgba(255,255,255,0.5);margin-bottom:2rem;font-size:0.95rem}
-        .modal-close{position:absolute;top:1rem;right:1.2rem;font-size:1.4rem;cursor:pointer;color:rgba(255,255,255,0.3);transition:color 0.3s ease;background:none;border:none;line-height:1}
-        .modal-close:hover{color:#fff}
-        .google-btn{display:flex;align-items:center;justify-content:center;gap:0.8rem;width:100%;padding:0.9rem;border-radius:12px;background:#fff;color:#333;font-size:1rem;font-weight:600;border:none;cursor:pointer;transition:all 0.3s ease}
-        .google-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,0.15)}
-        .google-btn svg{width:20px;height:20px;flex-shrink:0}
-        .divider{display:flex;align-items:center;gap:1rem;margin:1.5rem 0;color:rgba(255,255,255,0.2);font-size:0.85rem}
-        .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.06)}
-        .modal-input{width:100%;padding:0.85rem 1.2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;margin-bottom:0.8rem;outline:none;transition:all 0.3s ease}
-        .modal-input:focus{border-color:#00d4ff;background:rgba(0,212,255,0.05);box-shadow:0 0 20px rgba(0,212,255,0.08)}
-        .modal-input::placeholder{color:rgba(255,255,255,0.2)}
-        .modal-btn{width:100%;padding:0.9rem;border-radius:12px;background:linear-gradient(135deg,#00d4ff,#7b2ff7);color:#fff;font-size:1rem;font-weight:600;border:none;cursor:pointer;transition:all 0.3s ease;margin-top:0.5rem}
-        .modal-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.25)}
-        .modal-error{color:#ff4757;font-size:0.85rem;margin-bottom:0.8rem;display:none}
-        .modal-switch{margin-top:1.5rem;color:rgba(255,255,255,0.4);font-size:0.9rem}
-        .modal-switch a{color:#00d4ff;cursor:pointer;font-weight:600;transition:color 0.3s ease}
-        .modal-switch a:hover{color:#7b2ff7}
-        .user-avatar{width:60px;height:60px;border-radius:50%;margin:0 auto 1rem;background:linear-gradient(135deg,#00d4ff,#7b2ff7);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff;box-shadow:0 4px 20px rgba(0,212,255,0.3)}
+        /* ===== PRODUCTS / TEMPLATES GRID ===== */
+        .products-section {
+            background: linear-gradient(180deg, #07080a, #0c0e14);
+        }
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0,212,255,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 30px rgba(0,212,255,0.05);
+        }
+        .product-img {
+            height: 180px;
+            background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(123,47,247,0.08));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-img::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(7,8,10,0.6));
+        }
+        .product-img i { position: relative; z-index: 1; }
+        .product-badge {
+            position: absolute;
+            top: 10px; left: 10px;
+            z-index: 2;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .product-badge.new { background: #00d4ff; color: #000; }
+        .product-badge.sale { background: #ff2d95; color: #fff; }
+        .product-info { padding: 1rem 1.2rem 1.2rem; }
+        .product-info h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .product-info .product-desc { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; }
+        .product-info .product-price { font-size: 1.1rem; font-weight: 700; color: #00d4ff; }
+        .product-info .product-price .old-price { font-size: 0.8rem; color: rgba(255,255,255,0.3); text-decoration: line-through; margin-left: 0.5rem; font-weight: 400; }
+        .product-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+        .product-actions button {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-buy { background: linear-gradient(135deg, #00d4ff, #7b2ff7); color: #fff; }
+        .btn-buy:hover { transform: scale(1.02); box-shadow: 0 4px 15px rgba(0,212,255,0.2); }
+        .btn-cart { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.08) !important; }
+        .btn-cart:hover { background: rgba(255,255,255,0.1); }
 
-        .newsletter-section{padding:5rem 2rem;background:linear-gradient(180deg,#07080a,#0c0e14);text-align:center}
-        .newsletter-box{max-width:520px;margin:0 auto}
-        .newsletter-box h2{font-size:1.8rem;margin-bottom:0.5rem}
-        .newsletter-box p{color:rgba(255,255,255,0.5);margin-bottom:2rem}
-        .newsletter-form{display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center}
-        .newsletter-form input{flex:1;min-width:200px;padding:0.9rem 1.2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;outline:none;transition:all 0.3s ease}
-        .newsletter-form input:focus{border-color:#00d4ff;box-shadow:0 0 20px rgba(0,212,255,0.08)}
-        .newsletter-form button{padding:0.9rem 2rem;border-radius:12px;background:linear-gradient(135deg,#00d4ff,#7b2ff7);color:#fff;font-weight:600;border:none;cursor:pointer;transition:all 0.3s ease}
-        .newsletter-form button:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,212,255,0.25)}
-        .newsletter-success{color:#00d4ff;font-size:0.95rem;margin-top:1rem;display:none;animation:fadeInUp 0.5s ease}
+        /* ===== ADD / UPDATE PRODUCT MODAL ===== */
+        .product-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .product-modal.active { display: flex; }
+        .product-modal-content {
+            background: #0c0e14;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .product-modal-content h2 { font-size: 1.3rem; margin-bottom: 1.5rem; }
+        .product-modal-content .form-group { margin-bottom: 1rem; }
+        .product-modal-content label { display: block; font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; }
+        .product-modal-content input, .product-modal-content select, .product-modal-content textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.04);
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .product-modal-content input:focus, .product-modal-content select:focus, .product-modal-content textarea:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0,212,255,0.05);
+        }
+        .product-modal-content textarea { resize: vertical; min-height: 60px; }
+        .modal-actions { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+        .modal-actions button { flex: 1; padding: 0.7rem; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+        .modal-actions .btn-save { background: linear-gradient(135deg, #00d4ff, #7b2ff7); color: #fff; }
+        .modal-actions .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,212,255,0.2); }
+        .modal-actions .btn-cancel { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.08); }
+        .modal-actions .btn-cancel:hover { background: rgba(255,255,255,0.1); }
 
-        .footer{padding:3rem 2rem;background:#050608;border-top:1px solid rgba(255,255,255,0.03);text-align:center}
-        .footer-social{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1.5rem}
-        .footer-social a{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);transition:all 0.3s ease;font-size:1.2rem}
-        .footer-social a:hover{background:linear-gradient(135deg,#00d4ff,#7b2ff7);color:#fff;transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,212,255,0.2)}
-        .footer p{color:rgba(255,255,255,0.3);font-size:0.85rem}
+        /* ===== FEATURES ===== */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .feature-card:hover { border-color: rgba(0,212,255,0.15); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+        .feature-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+        .feature-card h4 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .feature-card p { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
 
-        .user-greeting{display:flex;align-items:center;gap:0.5rem;color:#00d4ff;font-weight:500;font-size:0.85rem}
-        .user-greeting .avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00d4ff,#7b2ff7);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#fff;font-weight:700}
+        /* ===== CONNECT ===== */
+        .connect-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .connect-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .connect-card:hover { border-color: rgba(0,212,255,0.15); transform: translateY(-4px); }
+        .connect-card .platform-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+        .connect-card h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .connect-card .handle { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+        .connect-card .follow-btn {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .connect-card .follow-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,212,255,0.2); }
 
-        .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-        .particle{position:absolute;width:3px;height:3px;background:#00d4ff;border-radius:50%;opacity:0.3;animation:particleFloat linear infinite}
-        .particle:nth-child(1){left:5%;animation-duration:18s;animation-delay:0s}
-        .particle:nth-child(2){left:15%;animation-duration:22s;animation-delay:2s;width:4px;height:4px;background:#7b2ff7}
-        .particle:nth-child(3){left:25%;animation-duration:16s;animation-delay:4s}
-        .particle:nth-child(4){left:35%;animation-duration:20s;animation-delay:1s;background:#7b2ff7}
-        .particle:nth-child(5){left:45%;animation-duration:24s;animation-delay:3s;width:2px;height:2px}
-        .particle:nth-child(6){left:55%;animation-duration:19s;animation-delay:5s;background:#7b2ff7}
-        .particle:nth-child(7){left:65%;animation-duration:21s;animation-delay:7s;width:5px;height:5px}
-        .particle:nth-child(8){left:75%;animation-duration:17s;animation-delay:2.5s}
-        .particle:nth-child(9){left:85%;animation-duration:23s;animation-delay:6s;background:#7b2ff7}
-        .particle:nth-child(10){left:92%;animation-duration:15s;animation-delay:4.5s}
-        .particle:nth-child(11){left:10%;animation-duration:20s;animation-delay:1.5s;width:4px;height:4px}
-        .particle:nth-child(12){left:50%;animation-duration:25s;animation-delay:3.5s;background:#7b2ff7}
-        .particle:nth-child(13){left:80%;animation-duration:18s;animation-delay:5.5s}
-        .particle:nth-child(14){left:30%;animation-duration:22s;animation-delay:0.5s;width:2px;height:2px}
-        .particle:nth-child(15){left:70%;animation-duration:16s;animation-delay:4.5s;background:#7b2ff7}
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .testimonial-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1.8rem;
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover { border-color: rgba(0,212,255,0.15); transform: translateY(-4px); }
+        .stars { color: #ffd700; font-size: 0.9rem; margin-bottom: 0.8rem; letter-spacing: 2px; }
+        .testimonial-card blockquote { font-size: 0.88rem; color: rgba(255,255,255,0.6); font-style: italic; margin-bottom: 1rem; line-height: 1.6; }
+        .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+        .testimonial-author img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(0,212,255,0.15); }
+        .testimonial-author .name { font-size: 0.85rem; font-weight: 600; }
+        .testimonial-author .location { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
 
-        @media(max-width:600px){
-            .hero{padding:1rem}
-            .social-grid{grid-template-columns:1fr}
-            .testimonials-grid{grid-template-columns:1fr}
-            .features-grid{grid-template-columns:1fr}
-            .modal-box{padding:2rem 1.5rem}
-            .btn-group .btn{width:100%;justify-content:center}
+        /* ===== NEWSLETTER ===== */
+        .newsletter-section { padding: 5rem 2rem; background: linear-gradient(180deg, #07080a, #0c0e14); text-align: center; }
+        .newsletter-box { max-width: 520px; margin: 0 auto; }
+        .newsletter-box h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .newsletter-box p { color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
+        .newsletter-form { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+        .newsletter-form input { flex: 1; min-width: 200px; padding: 0.9rem 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: #fff; font-size: 0.95rem; outline: none; transition: all 0.3s ease; }
+        .newsletter-form input:focus { border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.08); }
+        .newsletter-form button { padding: 0.9rem 2rem; border-radius: 12px; background: linear-gradient(135deg, #00d4ff, #7b2ff7); color: #fff; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; }
+        .newsletter-form button:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,212,255,0.25); }
+        .newsletter-success { color: #00d4ff; font-size: 0.95rem; margin-top: 1rem; display: none; }
+
+        /* ===== FOOTER ===== */
+        .footer { padding: 3rem 2rem; background: #050608; border-top: 1px solid rgba(255,255,255,0.03); text-align: center; }
+        .footer-social { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .footer-social a {
+            width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.04);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.5); transition: all 0.3s ease; font-size: 1.2rem;
+        }
+        .footer-social a:hover { background: linear-gradient(135deg, #00d4ff, #7b2ff7); color: #fff; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,212,255,0.2); }
+
+        /* ===== AUTH MODAL (existing preserved) ===== */
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 1500; align-items: center; justify-content: center; padding: 1rem; }
+        .modal.active { display: flex; }
+        .modal-content { background: #0c0e14; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 2.5rem; max-width: 400px; width: 100%; animation: modalIn 0.3s ease; }
+        .modal-content .modal-icon { font-size: 2.5rem; margin-bottom: 0.5rem; text-align: center; }
+        .modal-content h2 { text-align: center; font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .modal-content .modal-sub { text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .modal-content .form-group { margin-bottom: 1rem; }
+        .modal-content label { display: block; font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; }
+        .modal-content input { width: 100%; padding: 0.7rem 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: #fff; font-size: 0.9rem; outline: none; transition: all 0.3s ease; }
+        .modal-content input:focus { border-color: #00d4ff; }
+        .modal-content .btn-auth { width: 100%; padding: 0.8rem; border-radius: 10px; background: linear-gradient(135deg, #00d4ff, #7b2ff7); color: #fff; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; margin-top: 0.5rem; }
+        .modal-content .btn-auth:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,212,255,0.2); }
+        .modal-content .btn-google { width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); color: #fff; font-weight: 500; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+        .modal-content .btn-google:hover { background: rgba(255,255,255,0.08); }
+        .modal-content .divider { text-align: center; color: rgba(255,255,255,0.2); font-size: 0.8rem; margin: 1rem 0; position: relative; }
+        .modal-content .divider::before, .modal-content .divider::after { content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: rgba(255,255,255,0.06); }
+        .modal-content .divider::before { left: 0; } .modal-content .divider::after { right: 0; }
+        .modal-content .form-error { color: #ff2d95; font-size: 0.8rem; display: none; margin-top: 0.5rem; text-align: center; }
+        .modal-content .modal-footer { text-align: center; margin-top: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); }
+        .modal-content .modal-footer a { color: #00d4ff; cursor: pointer; }
+        .modal-content .modal-footer a:hover { text-decoration: underline; }
+        .close-modal { position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem; color: rgba(255,255,255,0.3); cursor: pointer; transition: color 0.3s ease; background: none; border: none; }
+        .close-modal:hover { color: #fff; }
+        .modal-content { position: relative; }
+        .welcome-view { display: none; text-align: center; padding: 2rem; }
+        .welcome-view .welcome-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .welcome-view h2 { margin-bottom: 0.3rem; }
+        .welcome-view p { color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .lang-bar { padding: 0.3rem 1rem; justify-content: center; }
+            #navbar { top: 34px; padding: 0.6rem 1rem; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(7,8,10,0.96); backdrop-filter: blur(16px); padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 1rem; }
+            .nav-links.open { display: flex; }
+            .nav-toggle { display: block; }
+            .search-box input { width: 80px; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .admin-bar { bottom: 10px; right: 10px; }
+            .admin-btn { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
+            section { padding: 3rem 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="particles">
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<!-- ===== LANGUAGE SELECTOR BAR ===== -->
+<div class="lang-bar" id="langBar">
+    <span><i class="fas fa-globe"></i></span>
+    <button class="lang-btn active" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="so">Af-Soomaali</button>
+    <button class="lang-btn" data-lang="ar">العربية</button>
+    <button class="lang-btn" data-lang="sw">Kiswahili</button>
+    <button class="lang-btn" data-lang="am">አማርኛ</button>
+    <button class="lang-btn" data-lang="fr">Français</button>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+    <div class="logo">Fikrado</div>
+    <div class="nav-links" id="navLinks">
+        <a href="#home" data-i18n="nav_home">Home</a>
+        <a href="#features" data-i18n="nav_features">Features</a>
+        <a href="#products" data-i18n="nav_products">Products</a>
+        <a href="#connect" data-i18n="nav_connect">Connect</a>
+        <a href="#testimonials" data-i18n="nav_reviews">Reviews</a>
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search products..." data-i18n="search_placeholder" />
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+        <button class="btn-signin" id="signInBtn" data-i18n="sign_in">Sign In</button>
+        <span id="userDisplay" style="display:none;font-size:0.85rem;color:rgba(255,255,255,0.7)"><i class="fas fa-user"></i> <span id="userName"></span></span>
     </div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+</nav>
 
-    <nav class="navbar" id="navbar">
-        <div class="nav-logo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-            Fikrado
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#connect">Connect</a></li>
-            <li><a href="#testimonials">Reviews</a></li>
-            <li id="authNavItem">
-                <button class="nav-auth-btn" id="signInBtn">Sign In</button>
-            </li>
-            <li id="userNavItem" style="display:none;">
-                <div class="user-greeting" id="userGreeting">
-                    <div class="avatar" id="userAvatar">U</div>
-                    <span id="userName">User</span>
-                </div>
-            </li>
-        </ul>
-    </nav>
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-badge"><i class="fas fa-bolt"></i> <span data-i18n="hero_badge">Premium Tech Store — Somalia</span></div>
+    <h1><span class="gradient-text" data-i18n="hero_title">Fikrado Electronics</span></h1>
+    <p data-i18n="hero_desc">Discover the latest in mobile phones, tablets, laptops, and cameras. Premium quality — competitive prices — trusted since 2024.</p>
+    <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><i class="fas fa-shopping-bag"></i> <span data-i18n="shop_now">Shop Now</span></button>
+        <button class="btn-secondary" onclick="document.getElementById('connect').scrollIntoView({behavior:'smooth'})"><i class="fas fa-comment"></i> <span data-i18n="connect_us">Connect With Us</span></button>
+    </div>
+</section>
 
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-badge">⚡ Premium Tech Store — Somalia</div>
-            <h1 class="hero-title">Fikrado Electronics</h1>
-            <p class="hero-subtitle">Discover the latest in mobile phones, tablets, laptops, and cameras</p>
-            <div class="typing-wrapper">
-                <div class="typing-text">Premium quality — competitive prices — trusted since 2024</div>
-            </div>
-            <p class="hero-description">
-                We bring you the finest electronics with genuine products, free delivery across Somalia, 
-                and 24/7 support. Your satisfaction is our mission.
-            </p>
-            <div class="btn-group">
-                <button class="btn btn-primary" onclick="document.getElementById('connect').scrollIntoView({behavior:'smooth'})">
-                    Connect With Us ↓
-                </button>
-                <button class="btn btn-outline" onclick="openModal()">
-                    Sign In / Join
-                </button>
-            </div>
-        </div>
-    </section>
+<!-- ===== FEATURES ===== -->
+<section id="features" style="background:linear-gradient(180deg,#0c0e14,#07080a)">
+    <div style="text-align:center;margin-bottom:2rem">
+        <div class="section-label" data-i18n="features_label">Why Choose Us</div>
+        <h2 class="section-title" data-i18n="features_title">We deliver excellence, every single time</h2>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🚚</div><h4 data-i18n="feat_delivery_title">Free Delivery</h4><p data-i18n="feat_delivery_desc">Free shipping on all orders across Somalia. Fast and reliable delivery to your doorstep.</p></div>
+        <div class="feature-card"><div class="feature-icon">✅</div><h4 data-i18n="feat_genuine_title">Genuine Products</h4><p data-i18n="feat_genuine_desc">100% authentic products with manufacturer warranty. Every item is verified before shipping.</p></div>
+        <div class="feature-card"><div class="feature-icon">💬</div><h4 data-i18n="feat_support_title">24/7 Support</h4><p data-i18n="feat_support_desc">Our support team is available around the clock via WhatsApp and phone to help you.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔄</div><h4 data-i18n="feat_returns_title">Easy Returns</h4><p data-i18n="feat_returns_desc">7-day return policy on all products. No questions asked — your satisfaction is guaranteed.</p></div>
+    </div>
+</section>
 
-    <section class="features-section" id="features">
-        <h2 class="section-title reveal">Why Choose Us</h2>
-        <p class="section-subtitle reveal stagger-1">We deliver excellence, every single time</p>
-        <div class="features-grid">
-            <div class="feature-item reveal stagger-1">
-                <span class="feature-icon">🚚</span>
-                <h4>Free Delivery</h4>
-                <p>Free shipping on all orders across Somalia. Fast and reliable delivery to your doorstep.</p>
-            </div>
-            <div class="feature-item reveal stagger-2">
-                <span class="feature-icon">✅</span>
-                <h4>Genuine Products</h4>
-                <p>100% authentic products with manufacturer warranty. Every item is verified before shipping.</p>
-            </div>
-            <div class="feature-item reveal stagger-3">
-                <span class="feature-icon">💬</span>
-                <h4>24/7 Support</h4>
-                <p>Our support team is available around the clock via WhatsApp and phone to help you.</p>
-            </div>
-            <div class="feature-item reveal stagger-4">
-                <span class="feature-icon">🔄</span>
-                <h4>Easy Returns</h4>
-                <p>7-day return policy on all products. No questions asked — your satisfaction is guaranteed.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="social-section" id="connect">
-        <h2 class="section-title reveal">Connect With Us</h2>
-        <p class="section-subtitle reveal stagger-1">Follow us on social media and stay updated</p>
-        <div class="social-grid">
-            <div class="social-card reveal-left stagger-1">
-                <div class="social-card-inner">
-                    <div class="social-icon icon-instagram">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-                            <rect x="2" y="2" width="20" height="20" rx="5"/>
-                            <circle cx="12" cy="12" r="5"/>
-                            <circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/>
-                        </svg>
-                    </div>
-                    <h3>Instagram</h3>
-                    <p class="social-username">@ilyas_yare45</p>
-                    <a href="https://instagram.com/ilyas_yare45" target="_blank" class="social-link">
-                        Follow on Instagram →
-                    </a>
-                </div>
-            </div>
-            <div class="social-card reveal-right stagger-2">
-                <div class="social-card-inner">
-                    <div class="social-icon icon-facebook">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z"/>
-                        </svg>
-                    </div>
-                    <h3>Facebook</h3>
-                    <p class="social-username">Ilyaas Abdi Ali</p>
-                    <a href="https://facebook.com/people/Ilyaas-Abdi-Ali/61574273161866" target="_blank" class="social-link">
-                        Connect on Facebook →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials-section" id="testimonials">
-        <h2 class="section-title reveal">What Our Customers Say</h2>
-        <p class="section-subtitle reveal stagger-1">Trusted by hundreds of customers across Somalia</p>
-        <div class="testimonials-grid">
-            <div class="testimonial-card reveal stagger-1">
-                <div class="testimonial-stars">★★★★★</div>
-                <blockquote>"I bought an iPhone from Fikrado Electronics and it arrived within 2 days. The product was genuine and the price was the best in town. Highly recommended!"</blockquote>
-                <div class="testimonial-author">
-                    <img src="https://i.pravatar.cc/40?img=1" alt="Ahmed" loading="lazy" />
-                    <div>
-                        <strong>Ahmed Hassan</strong>
-                        <span>Mogadishu</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal stagger-2">
-                <div class="testimonial-stars">★★★★★</div>
-                <blockquote>"Great customer service! They helped me choose the perfect laptop for my needs. The delivery was fast and the product was well packaged."</blockquote>
-                <div class="testimonial-author">
-                    <img src="https://i.pravatar.cc/40?img=5" alt="Fartun" loading="lazy" />
-                    <div>
-                        <strong>Fartun Ali</strong>
-                        <span>Hargeisa</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card reveal stagger-3">
-                <div class="testimonial-stars">★★★★★</div>
-                <blockquote>"Best electronics store in Somalia! Fair prices, genuine products, and they actually answer their WhatsApp quickly. Will definitely shop again."</blockquote>
-                <div class="testimonial-author">
-                    <img src="https://i.pravatar.cc/40?img=8" alt="Mohamed" loading="lazy" />
-                    <div>
-                        <strong>Mohamed Ibrahim</strong>
-                        <span>Kismayo</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="newsletter-section" id="newsletter">
-        <div class="newsletter-box reveal">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter and be the first to know about new arrivals, deals, and exclusive offers.</p>
-            <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
-                <input type="email" placeholder="Enter your email" required id="newsletterEmail" />
-                <button type="submit">Subscribe</button>
-            </form>
-            <div class="newsletter-success" id="newsletterSuccess">✓ Thank you for subscribing! Check your inbox soon.</div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-social">
-            <a href="https://instagram.com/ilyas_yare45" target="_blank" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2"/>
-                </svg>
-            </a>
-            <a href="https://facebook.com/people/Ilyaas-Abdi-Ali/61574273161866" target="_blank" aria-label="Facebook">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z"/>
-                </svg>
-            </a>
-            <a href="https://wa.me/252682390000" target="_blank" aria-label="WhatsApp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H6l-2 4 4-2a8.5 8.5 0 1 1 11.5-10.5z"/>
-                </svg>
-            </a>
-            <a href="mailto:info@fikrado.so" aria-label="Email">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/>
-                </svg>
-            </a>
-            <a href="https://t.me/fikrado" target="_blank" aria-label="Telegram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 2L11 13"/><path d="M22 2L15 22l-5-8-8-3.5L22 2z"/>
-                </svg>
-            </a>
-        </div>
-        <p>© 2026 Fikrado Electronics. All rights reserved. | Premium Tech Store | Mogadishu, Somalia</p>
-    </footer>
-
-    <div class="modal-overlay" id="authModal">
-        <div class="modal-box" id="modalBox">
-            <button class="modal-close" onclick="closeModal()">✕</button>
-
-            <div id="signInView">
-                <div class="user-avatar">🔐</div>
-                <h2>Welcome Back</h2>
-                <p class="modal-sub">Sign in to your Fikrado Electronics account</p>
-                <button class="google-btn" id="googleSignInBtn">
-                    <svg viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    <span>Continue with Google</span>
-                </button>
-                <div class="divider">or continue with email</div>
-                <div class="modal-error" id="signInError">Invalid credentials. Please try again.</div>
-                <input type="email" class="modal-input" placeholder="Email address" id="signInEmail" autocomplete="email" />
-                <input type="password" class="modal-input" placeholder="Password" id="signInPassword" autocomplete="current-password" />
-                <button class="modal-btn" onclick="handleSignIn()">Sign In</button>
-                <p class="modal-switch">Don't have an account? <a onclick="showSignUp()">Create one</a></p>
-            </div>
-
-            <div id="signUpView" style="display:none;">
-                <div class="user-avatar">✨</div>
-                <h2>Join Fikrado</h2>
-                <p class="modal-sub">Create your account to start exploring</p>
-                <button class="google-btn" id="googleSignUpBtn">
-                    <svg viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    <span>Continue with Google</span>
-                </button>
-                <div class="divider">or sign up with email</div>
-                <div class="modal-error" id="signUpError">Please fill in all fields.</div>
-                <input type="text" class="modal-input" placeholder="Full Name" id="signUpName" autocomplete="name" />
-                <input type="email" class="modal-input" placeholder="Email address" id="signUpEmail" autocomplete="email" />
-                <input type="password" class="modal-input" placeholder="Password (min 6 characters)" id="signUpPassword" autocomplete="new-password" />
-                <button class="modal-btn" onclick="handleSignUp()">Create Account</button>
-                <p class="modal-switch">Already have an account? <a onclick="showSignIn()">Sign in</a></p>
-            </div>
-
-            <div id="welcomeView" style="display:none;">
-                <div class="user-avatar" id="welcomeAvatar">👋</div>
-                <h2 id="welcomeTitle">Welcome!</h2>
-                <p class="modal-sub" id="welcomeSub">You are now signed in.</p>
-                <button class="modal-btn" onclick="closeModal()">Continue Shopping</button>
-                <p class="modal-switch"><a onclick="signOut()">Sign out</a></p>
-            </div>
+<!-- ===== PRODUCTS / TEMPLATES SECTION ===== -->
+<section id="products" class="products-section">
+    <div class="products-header">
+        <div>
+            <div class="section-label" data-i18n="products_label">Our Products</div>
+            <h2 class="section-title" data-i18n="products_title">Premium Tech Goods</h2>
+            <p class="section-sub" data-i18n="products_sub">Browse our curated collection of authentic electronics</p>
         </div>
     </div>
+    <div class="products-grid" id="productsGrid">
+        <!-- Products injected by JavaScript -->
+    </div>
+</section>
 
-    <script>
-        const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
-        let googleAccounts = null;
-        let currentUser = JSON.parse(localStorage.getItem('fikrado_user')) || null;
+<!-- ===== ADD / UPDATE PRODUCT MODAL ===== -->
+<div class="product-modal" id="productModal">
+    <div class="product-modal-content">
+        <h2 id="productModalTitle" data-i18n="add_product">Add New Product</h2>
+        <div class="form-group">
+            <label data-i18n="product_name_label">Product Name</label>
+            <input type="text" id="prodName" />
+        </div>
+        <div class="form-group">
+            <label data-i18n="product_desc_label">Description</label>
+            <textarea id="prodDesc"></textarea>
+        </div>
+        <div class="form-group">
+            <label data-i18n="product_price_label">Price ($)</label>
+            <input type="number" id="prodPrice" step="0.01" />
+        </div>
+        <div class="form-group">
+            <label data-i18n="product_oldprice_label">Old Price ($) - optional</label>
+            <input type="number" id="prodOldPrice" step="0.01" />
+        </div>
+        <div class="form-group">
+            <label data-i18n="product_icon_label">Icon (Font Awesome class, e.g. fa-mobile)</label>
+            <input type="text" id="prodIcon" placeholder="fa-mobile" />
+        </div>
+        <div class="form-group">
+            <label data-i18n="product_badge_label">Badge</label>
+            <select id="prodBadge">
+                <option value="">None</option>
+                <option value="new">New</option>
+                <option value="sale">Sale</option>
+            </select>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-save" id="prodSaveBtn" data-i18n="save_product">Save Product</button>
+            <button class="btn-cancel" onclick="closeProductModal()" data-i18n="cancel">Cancel</button>
+        </div>
+    </div>
+</div>
 
-        function loadGoogleAPI() {
-            const script = document.createElement('script');
-            script.src = 'https://accounts.google.com/gsi/client';
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
-                googleAccounts = google.accounts;
-                initializeGoogleSignIn();
-            };
-            script.onerror = () => console.warn('Google API failed to load. Email auth still works.');
-            document.head.appendChild(script);
+<!-- ===== CONNECT ===== -->
+<section id="connect" style="background:linear-gradient(180deg,#07080a,#0c0e14)">
+    <div style="text-align:center;margin-bottom:2rem">
+        <div class="section-label" data-i18n="connect_label">Connect With Us</div>
+        <h2 class="section-title" data-i18n="connect_title">Follow us on social media</h2>
+    </div>
+    <div class="connect-grid">
+        <div class="connect-card"><div class="platform-icon"><i class="fab fa-instagram" style="color:#E4405F"></i></div><h4>Instagram</h4><p class="handle">@ilyas_yare45</p><a href="https://instagram.com/ilyas_yare45" target="_blank" class="follow-btn"><i class="fab fa-instagram"></i> <span data-i18n="follow">Follow</span></a></div>
+        <div class="connect-card"><div class="platform-icon"><i class="fab fa-facebook" style="color:#1877F2"></i></div><h4>Facebook</h4><p class="handle">Ilyaas Abdi Ali</p><a href="https://facebook.com/people/Ilyaas-Abdi-Ali/61574273161866" target="_blank" class="follow-btn"><i class="fab fa-facebook"></i> <span data-i18n="follow">Follow</span></a></div>
+        <div class="connect-card"><div class="platform-icon"><i class="fab fa-whatsapp" style="color:#25D366"></i></div><h4>WhatsApp</h4><p class="handle">+252 68 239 0000</p><a href="https://wa.me/252682390000" target="_blank" class="follow-btn"><i class="fab fa-whatsapp"></i> <span data-i18n="chat">Chat</span></a></div>
+        <div class="connect-card"><div class="platform-icon"><i class="fab fa-telegram" style="color:#0088cc"></i></div><h4>Telegram</h4><p class="handle">@fikrado</p><a href="https://t.me/fikrado" target="_blank" class="follow-btn"><i class="fab fa-telegram"></i> <span data-i18n="join">Join</span></a></div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" style="background:linear-gradient(180deg,#0c0e14,#07080a)">
+    <div style="text-align:center;margin-bottom:2rem">
+        <div class="section-label" data-i18n="reviews_label">Testimonials</div>
+        <h2 class="section-title" data-i18n="reviews_title">What Our Customers Say</h2>
+        <p class="section-sub" style="margin:0 auto" data-i18n="reviews_sub">Trusted by hundreds of customers across Somalia</p>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote data-i18n="testimonial_1">"I bought an iPhone from Fikrado Electronics and it arrived within 2 days. The product was genuine and the price was the best in town. Highly recommended!"</blockquote><div class="testimonial-author"><img src="https://i.pravatar.cc/40?img=1" alt="Ahmed" /><div><div class="name">Ahmed Hassan</div><div class="location">Mogadishu</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote data-i18n="testimonial_2">"Great customer service! They helped me choose the perfect laptop for my needs. The delivery was fast and the product was well packaged."</blockquote><div class="testimonial-author"><img src="https://i.pravatar.cc/40?img=5" alt="Fartun" /><div><div class="name">Fartun Ali</div><div class="location">Hargeisa</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote data-i18n="testimonial_3">"Best electronics store in Somalia! Fair prices, genuine products, and they actually answer their WhatsApp quickly. Will definitely shop again."</blockquote><div class="testimonial-author"><img src="https://i.pravatar.cc/40?img=8" alt="Mohamed" /><div><div class="name">Mohamed Ibrahim</div><div class="location">Kismayo</div></div></div></div>
+    </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter-section" id="newsletter">
+    <div class="newsletter-box">
+        <h2 data-i18n="newsletter_title">Stay Updated</h2>
+        <p data-i18n="newsletter_desc">Subscribe to our newsletter and be the first to know about new arrivals, deals, and exclusive offers.</p>
+        <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
+            <input type="email" id="newsletterEmail" placeholder="your@email.com" required />
+            <button type="submit" data-i18n="subscribe">Subscribe</button>
+        </form>
+        <div class="newsletter-success" id="newsletterSuccess"><i class="fas fa-check-circle"></i> <span data-i18n="newsletter_success">Thank you for subscribing! Check your inbox soon.</span></div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-social">
+        <a href="https://instagram.com/ilyas_yare45" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/people/Ilyaas-Abdi-Ali/61574273161866" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://wa.me/252682390000" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:info@fikrado.so" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://t.me/fikrado" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p style="color:rgba(255,255,255,0.3);font-size:0.85rem">
+        &copy; 2026 Fikrado Electronics. <span data-i18n="footer_rights">All rights reserved.</span> | <span data-i18n="footer_tag">Premium Tech Store</span> | Mogadishu, Somalia
+    </p>
+</footer>
+
+<!-- ===== ADMIN BUTTONS (Add / Update Products) ===== -->
+<div class="admin-bar">
+    <button class="admin-btn add" onclick="openAddProductModal()"><i class="fas fa-plus-circle"></i> <span data-i18n="add_product_btn">Add Product</span></button>
+    <button class="admin-btn update" onclick="openUpdateProductModal()"><i class="fas fa-edit"></i> <span data-i18n="update_product_btn">Update Products</span></button>
+</div>
+
+<!-- ===== AUTH MODALS (preserved from original) ===== -->
+<div class="modal" id="authModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <div id="signInView">
+            <div class="modal-icon">🔐</div>
+            <h2 data-i18n="welcome_back">Welcome Back</h2>
+            <p class="modal-sub" data-i18n="sign_in_sub">Sign in to your Fikrado Electronics account</p>
+            <button class="btn-google" onclick="handleGoogleSignIn()"><i class="fab fa-google"></i> <span data-i18n="continue_google">Continue with Google</span></button>
+            <div class="divider" data-i18n="or">or continue with email</div>
+            <div class="form-group"><label data-i18n="email_label">Email</label><input type="email" id="signInEmail" placeholder="your@email.com" /></div>
+            <div class="form-group"><label data-i18n="password_label">Password</label><input type="password" id="signInPassword" placeholder="••••••" /></div>
+            <div class="form-error" id="signInError" data-i18n="invalid_credentials">Invalid credentials. Please try again.</div>
+            <button class="btn-auth" onclick="handleSignIn()" data-i18n="sign_in">Sign In</button>
+            <p class="modal-footer"><span data-i18n="no_account">Don't have an account?</span> <a onclick="showSignUp()" data-i18n="create_one">Create one</a></p>
+        </div>
+        <div id="signUpView" style="display:none">
+            <div class="modal-icon">✨</div>
+            <h2 data-i18n="join_title">Join Fikrado</h2>
+            <p class="modal-sub" data-i18n="join_sub">Create your account to start exploring</p>
+            <button class="btn-google" onclick="handleGoogleSignIn()"><i class="fab fa-google"></i> <span data-i18n="continue_google">Continue with Google</span></button>
+            <div class="divider" data-i18n="or">or sign up with email</div>
+            <div class="form-group"><label data-i18n="name_label">Full Name</label><input type="text" id="signUpName" placeholder="Ahmed Hassan" /></div>
+            <div class="form-group"><label data-i18n="email_label">Email</label><input type="email" id="signUpEmail" placeholder="your@email.com" /></div>
+            <div class="form-group"><label data-i18n="password_label">Password</label><input type="password" id="signUpPassword" placeholder="••••••" /></div>
+            <div class="form-error" id="signUpError" data-i18n="fill_fields">Please fill in all fields.</div>
+            <button class="btn-auth" onclick="handleSignUp()" data-i18n="create_account">Create Account</button>
+            <p class="modal-footer"><span data-i18n="have_account">Already have an account?</span> <a onclick="showSignIn()" data-i18n="sign_in">Sign in</a></p>
+        </div>
+        <div class="welcome-view" id="welcomeView">
+            <div class="welcome-icon">👋</div>
+            <h2 id="welcomeTitle" data-i18n="welcome_title">Welcome!</h2>
+            <p id="welcomeSub" data-i18n="welcome_sub">You are now signed in.</p>
+            <button class="btn-auth" onclick="closeModal()" data-i18n="continue_shopping">Continue Shopping</button>
+            <p class="modal-footer"><a onclick="signOut()" data-i18n="sign_out">Sign out</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// 1. PRODUCT DATA & LOCAL STORAGE
+// ============================================================
+const DEFAULT_PRODUCTS = [
+    { id: 1, name: "iPhone 15 Pro Max", desc: "256GB | Deep Purple | A17 Pro Chip", price: 1299, oldPrice: 1499, icon: "fa-mobile", badge: "new" },
+    { id: 2, name: "Samsung Galaxy S24 Ultra", desc: "512GB | Titanium Gray | S Pen", price: 1199, oldPrice: 1399, icon: "fa-mobile-screen", badge: "sale" },
+    { id: 3, name: "MacBook Air M3", desc: "15-inch | 16GB RAM | 512GB SSD", price: 1599, oldPrice: 1799, icon: "fa-laptop", badge: "new" },
+    { id: 4, name: "iPad Pro M4", desc: "12.9-inch | 256GB | Liquid Retina XDR", price: 1099, oldPrice: null, icon: "fa-tablet", badge: "" },
+    { id: 5, name: "Sony WH-1000XM5", desc: "Wireless Noise Cancelling | 30hr Battery", price: 349, oldPrice: 399, icon: "fa-headphones", badge: "sale" },
+    { id: 6, name: "Canon EOS R6 Mark II", desc: "24.2MP | 4K Video | Full-Frame Mirrorless", price: 2499, oldPrice: null, icon: "fa-camera", badge: "" },
+    { id: 7, name: "Apple Watch Ultra 2", desc: "49mm Titanium | GPS + Cellular", price: 799, oldPrice: 899, icon: "fa-clock", badge: "new" },
+    { id: 8, name: "AirPods Pro 2", desc: "USB-C | Active Noise Cancellation", price: 249, oldPrice: null, icon: "fa-earbuds", badge: "" }
+];
+
+function getProducts() {
+    const data = localStorage.getItem('fikrado_products');
+    if (data) return JSON.parse(data);
+    localStorage.setItem('fikrado_products', JSON.stringify(DEFAULT_PRODUCTS));
+    return [...DEFAULT_PRODUCTS];
+}
+
+function saveProducts(products) {
+    localStorage.setItem('fikrado_products', JSON.stringify(products));
+}
+
+function renderProducts(filter = '') {
+    const grid = document.getElementById('productsGrid');
+    const products = getProducts();
+    const term = filter.toLowerCase().trim();
+    const filtered = term ? products.filter(p =>
+        p.name.toLowerCase().includes(term) ||
+        p.desc.toLowerCase().includes(term)
+    ) : products;
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:rgba(255,255,255,0.3)">
+            <i class="fas fa-search" style="font-size:2rem;margin-bottom:1rem;display:block"></i>
+            <p data-i18n="no_products">No products found. Try a different search or add new products!</p>
+        </div>`;
+        return;
+    }
+
+    grid.innerHTML = filtered.map(p => `
+        <div class="product-card" data-id="${p.id}">
+            <div class="product-img">
+                ${p.badge ? `<span class="product-badge ${p.badge}">${p.badge === 'new' ? 'NEW' : 'SALE'}</span>` : ''}
+                <i class="fas ${p.icon || 'fa-box'}"></i>
+            </div>
+            <div class="product-info">
+                <h3>${p.name}</h3>
+                <p class="product-desc">${p.desc}</p>
+                <div class="product-price">
+                    $${p.price.toFixed(2)}
+                    ${p.oldPrice ? `<span class="old-price">$${p.oldPrice.toFixed(2)}</span>` : ''}
+                </div>
+                <div class="product-actions">
+                    <button class="btn-buy" onclick="event.stopPropagation();buyProduct(${p.id})"><i class="fas fa-shopping-bag"></i> Buy</button>
+                    <button class="btn-cart" onclick="event.stopPropagation();addToCart(${p.id})"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function buyProduct(id) {
+    const products = getProducts();
+    const p = products.find(x => x.id === id);
+    if (p) alert(`🛒 You selected: ${p.name}\nPrice: $${p.price.toFixed(2)}\n\nThank you for your interest! We'll contact you via WhatsApp.`);
+}
+
+function addToCart(id) {
+    const products = getProducts();
+    const p = products.find(x => x.id === id);
+    if (p) {
+        let cart = JSON.parse(localStorage.getItem('fikrado_cart') || '[]');
+        cart.push({ ...p, cartId: Date.now() });
+        localStorage.setItem('fikrado_cart', JSON.stringify(cart));
+        alert(`✅ "${p.name}" added to cart!`);
+    }
+}
+
+// ============================================================
+// 2. PRODUCT MODAL (Add / Update)
+// ============================================================
+let editingProductId = null;
+
+function openAddProductModal() {
+    editingProductId = null;
+    document.getElementById('productModalTitle').textContent = getTranslation('add_product') || 'Add New Product';
+    document.getElementById('prodSaveBtn').textContent = getTranslation('save_product') || 'Save Product';
+    document.getElementById('prodName').value = '';
+    document.getElementById('prodDesc').value = '';
+    document.getElementById('prodPrice').value = '';
+    document.getElementById('prodOldPrice').value = '';
+    document.getElementById('prodIcon').value = 'fa-mobile';
+    document.getElementById('prodBadge').value = '';
+    document.getElementById('productModal').classList.add('active');
+}
+
+function openUpdateProductModal() {
+    const products = getProducts();
+    if (products.length === 0) {
+        alert('No products to update. Add some first!');
+        return;
+    }
+    // Pick the first product to edit (or show a selector)
+    const names = products.map((p, i) => `${i+1}. ${p.name} ($${p.price})`).join('\n');
+    const choice = prompt(`Select a product to update by number:\n\n${names}\n\nEnter number (1-${products.length}):`);
+    if (!choice) return;
+    const idx = parseInt(choice) - 1;
+    if (isNaN(idx) || idx < 0 || idx >= products.length) {
+        alert('Invalid selection.');
+        return;
+    }
+    const p = products[idx];
+    editingProductId = p.id;
+    document.getElementById('productModalTitle').textContent = getTranslation('update_product') || 'Update Product';
+    document.getElementById('prodSaveBtn').textContent = getTranslation('save_changes') || 'Save Changes';
+    document.getElementById('prodName').value = p.name;
+    document.getElementById('prodDesc').value = p.desc;
+    document.getElementById('prodPrice').value = p.price;
+    document.getElementById('prodOldPrice').value = p.oldPrice || '';
+    document.getElementById('prodIcon').value = p.icon || 'fa-mobile';
+    document.getElementById('prodBadge').value = p.badge || '';
+    document.getElementById('productModal').classList.add('active');
+}
+
+document.getElementById('prodSaveBtn').addEventListener('click', function() {
+    const name = document.getElementById('prodName').value.trim();
+    const desc = document.getElementById('prodDesc').value.trim();
+    const price = parseFloat(document.getElementById('prodPrice').value);
+    const oldPrice = parseFloat(document.getElementById('prodOldPrice').value) || null;
+    const icon = document.getElementById('prodIcon').value.trim() || 'fa-box';
+    const badge = document.getElementById('prodBadge').value;
+
+    if (!name || !desc || isNaN(price)) {
+        alert('Please fill in name, description, and price.');
+        return;
+    }
+
+    let products = getProducts();
+
+    if (editingProductId) {
+        // Update existing
+        const idx = products.findIndex(p => p.id === editingProductId);
+        if (idx !== -1) {
+            products[idx] = { ...products[idx], name, desc, price, oldPrice, icon, badge };
         }
+    } else {
+        // Add new
+        const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        products.push({ id: newId, name, desc, price, oldPrice, icon, badge });
+    }
 
-        function initializeGoogleSignIn() {
-            if (!googleAccounts || GOOGLE_CLIENT_ID.includes('YOUR_GOOGLE_CLIENT_ID')) return;
-            try {
-                google.accounts.id.initialize({
-                    client_id: 293057151720-j902kohmducgbernpo3su9st1rcf3fc0.apps.googleusercontent.com,
-                    callback: handleGoogleCredentialResponse,
-                    auto_select: false,
-                    cancel_on_tap_outside: true
-                });
-                google.accounts.id.renderButton(document.getElementById('googleSignInBtn'),
-                    {type:'standard',shape:'pill',theme:'outline',text:'signin_with',size:'large',width:'100%'});
-                google.accounts.id.renderButton(document.getElementById('googleSignUpBtn'),
-                    {type:'standard',shape:'pill',theme:'outline',text:'signup_with',size:'large',width:'100%'});
-                document.getElementById('googleSignInBtn').addEventListener('click',(e)=>{e.preventDefault();google.accounts.id.prompt()});
-                document.getElementById('googleSignUpBtn').addEventListener('click',(e)=>{e.preventDefault();google.accounts.id.prompt()});
-            }catch(e){console.error('Google OAuth init error:',e)}
+    saveProducts(products);
+    renderProducts(document.getElementById('searchInput').value);
+    closeProductModal();
+});
+
+function closeProductModal() {
+    document.getElementById('productModal').classList.remove('active');
+    editingProductId = null;
+}
+
+// ============================================================
+// 3. SEARCH
+// ============================================================
+document.getElementById('searchBtn').addEventListener('click', function() {
+    renderProducts(document.getElementById('searchInput').value);
+});
+document.getElementById('searchInput').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') renderProducts(this.value);
+});
+
+// ============================================================
+// 4. MULTI-LANGUAGE SYSTEM (6 Languages)
+// ============================================================
+const translations = {
+    en: {
+        nav_home: "Home", nav_features: "Features", nav_products: "Products",
+        nav_connect: "Connect", nav_reviews: "Reviews", sign_in: "Sign In",
+        search_placeholder: "Search products...",
+        hero_badge: "Premium Tech Store — Somalia",
+        hero_title: "Fikrado Electronics",
+        hero_desc: "Discover the latest in mobile phones, tablets, laptops, and cameras. Premium quality — competitive prices — trusted since 2024.",
+        shop_now: "Shop Now", connect_us: "Connect With Us",
+        features_label: "Why Choose Us", features_title: "We deliver excellence, every single time",
+        feat_delivery_title: "Free Delivery", feat_delivery_desc: "Free shipping on all orders across Somalia. Fast and reliable delivery to your doorstep.",
+        feat_genuine_title: "Genuine Products", feat_genuine_desc: "100% authentic products with manufacturer warranty. Every item is verified before shipping.",
+        feat_support_title: "24/7 Support", feat_support_desc: "Our support team is available around the clock via WhatsApp and phone to help you.",
+        feat_returns_title: "Easy Returns", feat_returns_desc: "7-day return policy on all products. No questions asked — your satisfaction is guaranteed.",
+        products_label: "Our Products", products_title: "Premium Tech Goods",
+        products_sub: "Browse our curated collection of authentic electronics",
+        add_product: "Add New Product", update_product: "Update Product",
+        add_product_btn: "Add Product", update_product_btn: "Update Products",
+        save_product: "Save Product", save_changes: "Save Changes",
+        product_name_label: "Product Name", product_desc_label: "Description",
+        product_price_label: "Price
+$$
+    // ============================================================
+// 4. MULTI-LANGUAGE SYSTEM (6 Languages)
+// ============================================================
+const translations = {
+    en: {
+        nav_home: "Home", nav_features: "Features", nav_products: "Products",
+        nav_connect: "Connect", nav_reviews: "Reviews", sign_in: "Sign In",
+        search_placeholder: "Search products...",
+        hero_badge: "Premium Tech Store — Somalia",
+        hero_title: "Fikrado Electronics",
+        hero_desc: "Discover the latest in mobile phones, tablets, laptops, and cameras. Premium quality — competitive prices — trusted since 2024.",
+        shop_now: "Shop Now", connect_us: "Connect With Us",
+        features_label: "Why Choose Us", features_title: "We deliver excellence, every single time",
+        feat_delivery_title: "Free Delivery", feat_delivery_desc: "Free shipping on all orders across Somalia. Fast and reliable delivery to your doorstep.",
+        feat_genuine_title: "Genuine Products", feat_genuine_desc: "100% authentic products with manufacturer warranty. Every item is verified before shipping.",
+        feat_support_title: "24/7 Support", feat_support_desc: "Our support team is available around the clock via WhatsApp and phone to help you.",
+        feat_returns_title: "Easy Returns", feat_returns_desc: "7-day return policy on all products. No questions asked — your satisfaction is guaranteed.",
+        products_label: "Our Products", products_title: "Premium Tech Goods",
+        products_sub: "Browse our curated collection of authentic electronics",
+        add_product: "Add New Product", update_product: "Update Product",
+        add_product_btn: "Add Product", update_product_btn: "Update Products",
+        save_product: "Save Product", save_changes: "Save Changes", cancel: "Cancel",
+        product_name_label: "Product Name", product_desc_label: "Description",
+        product_price_label: "Price ($)", product_oldprice_label: "Old Price ($) - optional",
+        product_icon_label: "Icon (Font Awesome)", product_badge_label: "Badge",
+        no_products: "No products found. Try a different search or add new products!",
+        connect_label: "Connect With Us", connect_title: "Follow us on social media",
+        follow: "Follow", chat: "Chat", join: "Join",
+        reviews_label: "Testimonials", reviews_title: "What Our Customers Say",
+        reviews_sub: "Trusted by hundreds of customers across Somalia",
+        testimonial_1: '"I bought an iPhone from Fikrado Electronics and it arrived within 2 days. The product was genuine and the price was the best in town. Highly recommended!"',
+        testimonial_2: '"Great customer service! They helped me choose the perfect laptop for my needs. The delivery was fast and the product was well packaged."',
+        testimonial_3: '"Best electronics store in Somalia! Fair prices, genuine products, and they actually answer their WhatsApp quickly. Will definitely shop again."',
+        newsletter_title: "Stay Updated", newsletter_desc: "Subscribe to our newsletter and be the first to know about new arrivals, deals, and exclusive offers.",
+        subscribe: "Subscribe", newsletter_success: "Thank you for subscribing! Check your inbox soon.",
+        footer_rights: "All rights reserved.", footer_tag: "Premium Tech Store",
+        welcome_back: "Welcome Back", sign_in_sub: "Sign in to your Fikrado Electronics account",
+        continue_google: "Continue with Google", or: "or continue with email",
+        email_label: "Email", password_label: "Password",
+        invalid_credentials: "Invalid credentials. Please try again.",
+        no_account: "Don't have an account?", create_one: "Create one",
+        join_title: "Join Fikrado", join_sub: "Create your account to start exploring",
+        name_label: "Full Name", fill_fields: "Please fill in all fields.",
+        create_account: "Create Account", have_account: "Already have an account?",
+        welcome_title: "Welcome!", welcome_sub: "You are now signed in.",
+        continue_shopping: "Continue Shopping", sign_out: "Sign out"
+    },
+    so: {
+        nav_home: "Guriga", nav_features: "Astaamaha", nav_products: "Alaabta",
+        nav_connect: "Xiriir", nav_reviews: "Faallooyin", sign_in: "Soo Gal",
+        search_paragraph: "Raadi alaab...",
+        hero_badge: "Dukaanka Tignoolajiyada — Soomaaliya",
+        hero_title: "Fikrado Electronics",
+        hero_desc: "Soo hel taleefannada, kumbuyuutarrada, iyo kamaradaha ugu cusub. Tayada sare — qiimo jaban — la aamini karo ilaa 2024.",
+        shop_now: "Iibso Hadda", connect_us: "Nagu Xiriir",
+        features_label: "Sababta Nagu Doorato", features_title: "Waxaan keenaynaa tayo, mar kasta",
+        feat_delivery_title: "Gaarsiin Bilaash ah", feat_delivery_desc: "Gaarsiin bilaash ah oo Soomaaliya oo dhan ah. Gaarsiin degdeg ah oo lagu kalsoonaan karo.",
+        feat_genuine_title: "Alaab Dhab ah", feat_genuine_desc: "100% alaab dhab ah oo leh dammaanad. Alaab walba waa la hubiyaa kahor gaarsiinta.",
+        feat_support_title: "Taageerada 24/7", feat_support_desc: "Kooxdayada taageerada ayaa diyaar ah 24 saacadood iyada oo loo marayo WhatsApp iyo taleefoon.",
+        feat_returns_title: "Ku Laabasho Fudud", feat_returns_desc: "7 maalmood oo ku laabasho ah. Shaki la'aan — qanacsanaantaada waa la dammaanad qaaday.",
+        products_label: "Alaabtayada", products_title: "Alaab Tignoolajiyo",
+        products_sub: "Ka fiirso ururintayada alaabta tayada sare leh",
+        add_product: "Ku Dar Alaab Cusub", update_product: "Cusboonaysii Alaab",
+        add_product_btn: "Ku Dar Alaab", update_product_btn: "Cusboonaysii Alaab",
+        save_product: "Kaydi Alaabta", save_changes: "Kaydi Beddelka", cancel: "Jooji",
+        product_name_label: "Magaca Alaabta", product_desc_label: "Sharaxaad",
+        product_price_label: "Qiimaha ($)", product_oldprice_label: "Qiimihii Hore ($) - ikhtiyaar",
+        product_icon_label: "Icon (Font Awesome)", product_badge_label: "Calaamad",
+        no_products: "Ma jiraan alaab. Isku day raadin kale ama ku dar alaab cusub!",
+        connect_label: "Nagu Xiriir", connect_title: "Nagu soo raac baraha bulshada",
+        follow: "Raac", chat: "Hadl", join: "Ku Biir",
+        reviews_label: "Faallooyin", reviews_title: "Maxay Dhawaaqaysatu Qabaan",
+        reviews_sub: "Ay ku kalsoon yihiin boqollaal macmiil oo Soomaaliya ah",
+        testimonial_1: '"Waxaan ka iibsaday iPhone Fikrado Electronics waxaana yimid laba maalmood gudahood. Alaabtu waa dhab tahay qiimuhuna waa kan ugu fiican. Waxaan kugu talinayaa!"',
+        testimonial_2: '"Adeegga macmiilka waa mid fiican! Waxay iga caawiyeen inaan helo kumbuyuutarka ugu fiican. Gaarsiintu waxay ahayd mid degdeg ah."',
+        testimonial_3: '"Dukaanka ugu fiican ee Soomaaliya! Qiimo fiican, alaab dhab ah, waxayna si degdeg ah ugu jawaabaan WhatsApp. Mar kale waan soo iibsan doonaa."',
+        newsletter_title: "La Soco", newsletter_desc: "Ku biir liistayada si aad uhesho wararka cusub, qiimo dhimista, iyo dalabyada gaarka ah.",
+        subscribe: "Wargeliso", newsletter_success: "Mahadsanid! Wixii cusub waan kuusoo diri doonnaa.",
+        footer_rights: "Xuquuqda oo dhan waa la dhawray.", footer_tag: "Dukaan Tignoolajiyo",
+        welcome_back: "Soo Dhawoow", sign_in_sub: "Ku soo gal akoonkaaga Fikrado Electronics",
+        continue_google: "Ku sii wad Google", or: "ama ku sii wad email",
+        email_label: "Email", password_label: "Furaha",
+        invalid_credentials: "Furaha ama emailka waa qalad. Fadlan isku day mar kale.",
+        no_account: "Malahan akoon?", create_one: "Abuur mid",
+        join_title: "Ku Biir Fikrado", join_sub: "Abuur akoonkaaga si aad u bilowdo sahaminta",
+        name_label: "Magaca Buuxa", fill_fields: "Fadlan buuxi dhammaan goobaha.",
+        create_account: "Abuur Akoon", have_account: "Akoonbaa horey uga yaal?",
+        welcome_title: "Soo Dhawaada!", welcome_sub: "Hadda waa la soo galay.",
+        continue_shopping: "Siiwada Iibka", sign_out: "Ka Bax"
+    },
+    ar: {
+        nav_home: "الرئيسية", nav_features: "المميزات", nav_products: "المنتجات",
+        nav_connect: "اتصل", nav_reviews: "التقييمات", sign_in: "تسجيل الدخول",
+        search_placeholder: "بحث عن منتجات...",
+        hero_badge: "متجر التكنولوجيا الفاخرة — الصومال",
+        hero_title: "فيكرادو إلكترونيكس",
+        hero_desc: "اكتشف أحدث الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر المحمولة والكاميرات. جودة فائقة — أسعار تنافسية — موثوق منذ 2024.",
+        shop_now: "تسوق الآن", connect_us: "تواصل معنا",
+        features_label: "لماذا تختارنا", features_title: "نقدم التميز، في كل مرة",
+        feat_delivery_title: "توصيل مجاني", feat_delivery_desc: "شحن مجاني على جميع الطلبات عبر الصومال. توصيل سريع وموثوق إلى باب منزلك.",
+        feat_genuine_title: "منتجات أصلية", feat_genuine_desc: "100% منتجات أصلية مع ضمان المصنع. يتم التحقق من كل عنصر قبل الشحن.",
+        feat_support_title: "دعم 24/7", feat_support_desc: "فريق الدعم لدينا متاح على مدار الساعة عبر واتساب والهاتف لمساعدتك.",
+        feat_returns_title: "إرجاع سهل", feat_returns_desc: "سياسة الإرجاع لمدة 7 أيام على جميع المنتجات. لا توجد أسئلة — رضاك مضمون.",
+        products_label: "منتجاتنا", products_title: "سلع تكنولوجية فاخرة",
+        products_sub: "تصفح مجموعتنا المختارة من الإلكترونيات الأصلية",
+        add_product: "إضافة منتج جديد", update_product: "تحديث المنتج",
+        add_product_btn: "إضافة منتج", update_product_btn: "تحديث المنتجات",
+        save_product: "حفظ المنتج", save_changes: "حفظ التغييرات", cancel: "إلغاء",
+        product_name_label: "اسم المنتج", product_desc_label: "الوصف",
+        product_price_label: "السعر ($)", product_oldprice_label: "السعر القديم ($) - اختياري",
+        product_icon_label: "الأيقونة (Font Awesome)", product_badge_label: "الشارة",
+        no_products: "لم يتم العثور على منتجات. جرب بحثًا مختلفًا أو أضف منتجات جديدة!",
+        connect_label: "تواصل معنا", connect_title: "تابعنا على وسائل التواصل الاجتماعي",
+        follow: "متابعة", chat: "دردشة", join: "انضمام",
+        reviews_label: "التقييمات", reviews_title: "ماذا يقول عملاؤنا",
+        reviews_sub: "موثوق به من قبل مئات العملاء عبر الصومال",
+        testimonial_1: '"اشتريت آيفون من فيكرادو إلكترونيكس ووصل خلال يومين. المنتج أصلي والسعر كان الأفضل في المدينة. أوصي به بشدة!"',
+        testimonial_2: '"خدمة عملاء رائعة! ساعدوني في اختيار الكمبيوتر المحمول المثالي لاحتياجاتي. كان التوصيل سريعًا والمنتج معبأ جيدًا."',
+        testimonial_3: '"أفضل متجر إلكترونيات في الصومال! أسعار عادلة، منتجات أصلية، ويجيبون على واتساب بسرعة. سأشتري مرة أخرى بالتأكيد."',
+        newsletter_title: "ابق على اطلاع", newsletter_desc: "اشترك في نشرتنا الإخبارية وكن أول من يعرف عن الوافدين الجدد والعروض الحصرية.",
+        subscribe: "اشتراك", newsletter_success: "شكرًا لك على الاشتراك! تحقق من بريدك الوارد قريبًا.",
+        footer_rights: "جميع الحقوق محفوظة.", footer_tag: "متجر التكنولوجيا الفاخرة",
+        welcome_back: "مرحبًا بعودتك", sign_in_sub: "تسجيل الدخول إلى حسابك في فيكرادو إلكترونيكس",
+        continue_google: "المتابعة مع جوجل", or: "أو المتابعة بالبريد الإلكتروني",
+        email_label: "البريد الإلكتروني", password_label: "كلمة المرور",
+        invalid_credentials: "بيانات الاعتماد غير صالحة. حاول مرة أخرى.",
+        no_account: "ليس لديك حساب؟", create_one: "إنشاء حساب",
+        join_title: "انضم إلى فيكرادو", join_sub: "أنشئ حسابك لبدء الاستكشاف",
+        name_label: "الاسم الكامل", fill_fields: "يرجى ملء جميع الحقول.",
+        create_account: "إنشاء حساب", have_account: "هل لديك حساب بالفعل؟",
+        welcome_title: "مرحبًا!", welcome_sub: "لقد تم تسجيل الدخول بنجاح.",
+        continue_shopping: "مواصلة التسوق", sign_out: "تسجيل الخروج"
+    },
+    sw: {
+        nav_home: "Nyumbani", nav_features: "Vipengele", nav_products: "Bidhaa",
+        nav_connect: "Wasiliana", nav_reviews: "Maoni", sign_in: "Ingia",
+        search_placeholder: "Tafuta bidhaa...",
+        hero_badge: "Duka la Teknolojia — Somalia",
+        hero_title: "Fikrado Electronics",
+        hero_desc: "Gundua simu za mkononi, kompyuta ndogo, na kamera za kisasa. Ubora wa juu — bei shindani — kuaminika tangu 2024.",
+        shop_now: "Nunua Sasa", connect_us: "Wasiliana Nasi",
+        features_label: "Kwa Nini Utuchague", features_title: "Tunatoa ubora, kila wakati",
+        feat_delivery_title: "Usafirishaji Bure", feat_delivery_desc: "Usafirishaji bure kwa maagizo yote kote Somalia. Uwasilishaji wa haraka na wa kuaminika.",
+        feat_genuine_title: "Bidhaa Halisi", feat_genuine_desc: "100% bidhaa halisi na dhamana ya mtengenezaji. Kila bidhaa inathibitishwa kabla ya kusafirishwa.",
+        feat_support_title: "Msaada 24/7", feat_support_desc: "Timu yetu inapatikana saa nzima kupitia WhatsApp na simu kukusaidia.",
+        feat_returns_title: "Kurudisha Rahisi", feat_returns_desc: "Sera ya kurudisha siku 7 kwa bidhaa zote. Maswali yoyote hayataulizwa — kuridhika kwako kumehakikishwa.",
+        products_label: "Bidhaa Zetu", products_title: "Bidhaa Bora za Teknolojia",
+        products_sub: "Vinjari mkusanyiko wetu wa elektroniki halisi",
+        add_product: "Ongeza Bidhaa Mpya", update_product: "Sasisha Bidhaa",
+        add_product_btn: "Ongeza Bidhaa", update_product_btn: "Sasisha Bidhaa",
+        save_product: "Hifadhi Bidhaa", save_changes: "Hifadhi Mabadiliko", cancel: "Ghairi",
+        product_name_label: "Jina la Bidhaa", product_desc_label: "Maelezo",
+        product_price_label: "Bei ($)", product_oldprice_label: "Bei ya Zamani ($) - hiari",
+        product_icon_label: "Icon (Font Awesome)", product_badge_label: "Beji",
+        no_products: "Hakuna bidhaa zilizopatikana. Jaribu utafiti tofauti au ongeza bidhaa mpya!",
+        connect_label: "Wasiliana Nasi", connect_title: "Tufuate kwenye mitandao ya kijamii",
+        follow: "Fuata", chat: "Ongea", join: "Jiunge",
+        reviews_label: "Maoni", reviews_title: "Wateja Wetu Wanasema Nini",
+        reviews_sub: "Kuaminiwa na mamia ya wateja kote Somalia",
+        testimonial_1: '"Nilinunua iPhone kutoka Fikrado Electronics na ilifika ndani ya siku 2. Bidhaa ilikuwa halisi na bei ilikuwa bora mjini. Ninapendekeza sana!"',
+        testimonial_2: '"Huduma nzuri kwa wateja! Walinisaidia kuchagua kompyuta bora. Uwasilishaji ulikuwa wa haraka."',
+        testimonial_3: '"Duka bora zaidi la umeme Somalia! Bei nzuri, bidhaa halisi, na wanajibu WhatsApp kwa haraka."',
+        newsletter_title: "Endelea Kupata Habari", newsletter_desc: "Jiandikisha kupata habari za bidhaa mpya na ofa maalum.",
+        subscribe: "Jisajili", newsletter_success: "Asante! Angalia barua pepe yako hivi karibuni.",
+        footer_rights: "Haki zote zimehifadhiwa.", footer_tag: "Duka la Teknolojia",
+        welcome_back: "Karibu Tena", sign_in_sub: "Ingia kwenye akaunti yako",
+        continue_google: "Endelea na Google", or: "au endelea na barua pepe",
+        email_label: "Barua Pepe", password_label: "Nenosiri",
+        invalid_credentials: "Nenosiri si sahihi. Jaribu tena.",
+        no_account: "Huna akaunti?", create_one: "Unda moja",
+        join_title: "Jiunge na Fikrado", join_sub: "Unda akaunti kuanza kuchunguza",
+        name_label: "Jina Kamili", fill_fields: "Tafadhali jaza sehemu zote.",
+        create_account: "Unda Akaunti", have_account: "Tayari una akaunti?",
+        welcome_title: "Karibu!", welcome_sub: "Umeingia kwa mafanikio.",
+        continue_shopping: "Endelea Kununua", sign_out: "Toka"
+    },
+    am: {
+        nav_home: "መግቢያ", nav_features: "ባህሪያት", nav_products: "ምርቶች",
+        nav_connect: "ያገናኙ", nav_reviews: "ግምገማዎች", sign_in: "ግባ",
+        search_placeholder: "ምርቶችን ይፈልጉ...",
+        hero_badge: "ፕሪሚየም ቴክ መደብር — ሶማሊያ",
+        hero_title: "Fikrado ኤሌክትሮኒክስ",
+        hero_desc: "አዳዲስ ሞባይሎችን፣ ታብሌቶችን፣ ላፕቶፖችን እና ካሜራዎችን ያግኙ። ከፍተኛ ጥራት — ተወዳዳሪ ዋጋ — ከ2024 ጀምሮ እምነት የሚጣልበት።",
+        shop_now: "አሁን ይግዙ", connect_us: "ያገናኙን",
+        features_label: "ለምን እኛን ይመርጣሉ", features_title: "በሁሉም ጊዜ የላቀ አገልግሎት እንሰጣለን",
+        feat_delivery_title: "ነፃ መላኪያ", feat_delivery_desc: "በመላ ሶማሊያ ውስጥ በሁሉም ትዕዛዞች ላይ ነፃ መላኪያ። ፈጣን እና አስተማማኝ መላኪያ።",
+        feat_genuine_title: "ምርቶች ዋና", feat_genuine_desc: "100% ዋና ምርቶች ከአምራች ዋስትና ጋር። እያንዳንዱ እቃ ከመላኩ በፊት ተረጋግጧል።",
+        feat_support_title: "የ24/7 ድጋፍ", feat_support_desc: "የድጋፍ ቡድናችን በዋትሳፕ እና በስልክ ሙሉ ጊዜ ይገኛል።",
+        feat_returns_title: "ቀላል መመለሻ", feat_returns_desc: "በሁሉም ምርቶች ላይ የ7 ቀን የመመለሻ ፖሊሲ። እርካታዎ የተረጋገጠ ነው።",
+        products_label: "ምርቶቻችን", products_title: "ፕሪሚየም ቴክ ምርቶች",
+        products_sub: "የእኛን የተመረጡ ዋና ኤሌክትሮኒክስ ምርቶች ይመልከቱ",
+        add_product: "አዲስ ምርት ያክሉ", update_product: "ምርት ያዘምኑ",
+        add_product_btn: "ምርት ያክሉ", update_product_btn: "ምርቶችን ያዘምኑ",
+        save_product: "ምርት ያስቀምጡ", save_changes: "ለውጦችን ያስቀምጡ", cancel: "ይቅር",
+        product_name_label: "የምርት ስም", product_desc_label: "መግለጫ",
+        product_price_label: "ዋጋ ($)", product_oldprice_label: "የድሮ ዋጋ ($) - አማራጭ",
+        product_icon_label: "አዶ (Font Awesome)", product_badge_label: "ባጅ",
+        no_products: "ምንም ምርት አልተገኘም። የተለየ ፍለጋ ይሞክሩ ወይም አዲስ ምርቶችን ያክሉ!",
+        connect_label: "ያገናኙን", connect_title: "በማህበራዊ ሚዲያ ይከተሉን",
+        follow: "ተከተሉ", chat: "ውይይት", join: "ይቀላቀሉ",
+        reviews_label: "ግምገማዎች", reviews_title: "ደንበኞቻችን ምን ይላሉ",
+        reviews_sub: "በመላ ሶማሊያ በመቶዎች ደንበኞች የታመነ",
+        testimonial_1: '"ከFikrado ኤሌክትሮኒክስ iPhone ገዛሁ በ2 ቀናት ውስጥ ደረሰ። ምርቱ ዋና ነበር ዋጋውም ከተማ ውስጥ ምርጥ ነበር። በጣም እመክራለሁ!"',
+        testimonial_2: '"እንግዳ ተቀባይ አገልግሎት! ለፍላጎቴ ተስማሚ ላፕቶፕ እንድመርጥ ረዱኝ። መላኪያው ፈጣን ነበር።"',
+        testimonial_3: '"በሶማሊያ ውስጥ ምርጥ የኤሌክትሮኒክስ መደብር! ተመጣጣኝ ዋጋ፣ ዋና ምርቶች፣ እና ዋትሳፕን በፍጥነት ይመልሳሉ።"',
+        newsletter_title: "የተዘመኑ ይሁኑ", newsletter_desc: "ለጋዜጣችን ይመዝገቡ እና አዲስ መጤዎችን እና ቅናሾችን የመጀመሪያ ይሁኑ።",
+        subscribe: "ይመዝገቡ", newsletter_success: "እንግዲህ ይመልሱ! በቅርቡ የገቢ መልዕክት ሳጥንዎን ይፈትሹ።",
+        footer_rights: "መብቱ በህግ የተጠበቀ ነው.", footer_tag: "ፕሪሚየም ቴክ መደብር",
+        welcome_back: "እንኳን ደህና መጡ", sign_in_sub: "ወደ Fikrado ኤሌክትሮኒክስ መለያዎ ይግቡ",
+        continue_google: "በጉግል ይቀጥሉ", or: "ወይም በኢሜል ይቀጥሉ",
+        email_label: "ኢሜል", password_label: "የይለፍ ቃል",
+        invalid_credentials: "የተሳሳቱ መረጃዎች። እባክዎ እንደገና ይሞክሩ።",
+        no_account: "መለያ የለዎትም?", create_one: "አዲስ ይፍጠሩ",
+        join_title: "Fikradoን ይቀላቀሉ", join_sub: "መለያዎን ይፍጠሩ ማሰስ ለመጀመር",
+        name_label: "ሙሉ ስም", fill_fields: "እባክዎ ሁሉንም መስኮች ይሙሉ።",
+        create_account: "መለያ ይፍጠሩ", have_account: "ቀድሞውኑ መለያ አለዎት?",
+        welcome_title: "እንኳን ደህና መጡ!", welcome_sub: "በተሳካ ሁኔታ ገብተዋል።",
+        continue_shopping: "መግዛት ይቀጥሉ", sign_out: "ውጣ"
+    },
+    fr: {
+        nav_home: "Accueil", nav_features: "Fonctionnalités", nav_products: "Produits",
+        nav_connect: "Contact", nav_reviews: "Avis", sign_in: "Connexion",
+        search_placeholder: "Rechercher des produits...",
+        hero_badge: "Magasin Premium Tech — Somalie",
+        hero_title: "Fikrado Electronics",
+        hero_desc: "Découvrez les derniers téléphones, tablettes, ordinateurs portables et appareils photo. Qualité premium — prix compétitifs — de confiance depuis 2024.",
+        shop_now: "Acheter Maintenant", connect_us: "Contactez-Nous",
+        features_label: "Pourquoi Nous Choisir", features_title: "Nous offrons l'excellence, à chaque fois",
+        feat_delivery_title: "Livraison Gratuite", feat_delivery_desc: "Livraison gratuite sur toutes les commandes en Somalie. Livraison rapide et fiable à votre porte.",
+        feat_genuine_title: "Produits Authentiques", feat_genuine_desc: "100% produits authentiques avec garantie constructeur. Chaque article est vérifié avant expédition.",
+        feat_support_title: "Support 24/7", feat_support_desc: "Notre équipe de support est disponible 24h/24 via WhatsApp et téléphone.",
+        feat_returns_title: "Retours Faciles", feat_returns_desc: "Politique de retour de 7 jours sur tous les produits. Aucune question posée — votre satisfaction est garantie.",
+        products_label: "Nos Produits", products_title: "Produits Tech Premium",
+        products_sub: "Parcourez notre collection d'électronique authentique",
+        add_product: "Ajouter un Produit", update_product: "Modifier le Produit",
+        add_product_btn: "Ajouter Produit", update_product_btn: "Modifier Produits",
+        save_product: "Enregistrer", save_changes: "Sauvegarder", cancel: "Annuler",
+        product_name_label: "Nom du Produit", product_desc_label: "Description",
+        product_price_label: "Prix ($)", product_oldprice_label: "Ancien Prix ($) - optionnel",
+        product_icon_label: "Icône (Font Awesome)", product_badge_label: "Badge",
+        no_products: "Aucun produit trouvé. Essayez une autre recherche ou ajoutez de nouveaux produits!",
+        connect_label: "Contactez-Nous", connect_title: "Suivez-nous sur les réseaux sociaux",
+        follow: "Suivre", chat: "Discuter", join: "Rejoindre",
+        reviews_label: "Avis", reviews_title: "Ce Que Disent Nos Clients",
+        reviews_sub: "Approuvé par des centaines de clients à travers la Somalie",
+        testimonial_1: '"J\'ai acheté un iPhone chez Fikrado Electronics et il est arrivé en 2 jours. Le produit était authentique et le prix était le meilleur. Hautement recommandé!"',
+        testimonial_2: '"Excellent service client! Ils m\'ont aidé à choisir l\'ordinateur idéal. La livraison était rapide et le produit bien emballé."',
+        testimonial_3: '"Le meilleur magasin d\'électronique en Somalie! Prix justes, produits authentiques, et répondent rapidement sur WhatsApp."',
+        newsletter_title: "Restez Informé", newsletter_desc: "Abonnez-vous à notre newsletter pour être le premier informé des nouveaux arrivages et offres exclusives.",
+        subscribe: "S'abonner", newsletter_success: "Merci! Vérifiez votre boîte de réception bientôt.",
+        footer_rights: "Tous droits réservés.", footer_tag: "Magasin Tech Premium",
+        welcome_back: "Bon Retour", sign_in_sub: "Connectez-vous à votre compte Fikrado Electronics",
+        continue_google: "Continuer avec Google", or: "ou continuer avec email",
+        email_label: "Email", password_label: "Mot de passe",
+        invalid_credentials: "Identifiants invalides. Veuillez réessayer.",
+        no_account: "Pas de compte?", create_one: "Créer un compte",
+        join_title: "Rejoindre Fikrado", join_sub: "Créez votre compte pour commencer",
+        name_label: "Nom Complet", fill_fields: "Veuillez remplir tous les champs.",
+        create_account: "Créer un Compte", have_account: "Déjà un compte?",
+        welcome_title: "Bienvenue!", welcome_sub: "Vous êtes connecté.",
+        continue_shopping: "Continuer vos Achats", sign_out: "Déconnexion"
+    }
+};
+
+let currentLang = localStorage.getItem('fikrado_lang') || 'en';
+
+function getTranslation(key) {
+    return translations[currentLang]?.[key] || translations['en']?.[key] || key;
+}
+
+function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('fikrado_lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const text = getTranslation(key);
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.setAttribute('placeholder', text);
+        } else {
+            el.textContent = text;
         }
+    });
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    // RTL support for Arabic
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+}
 
-        function handleGoogleCredentialResponse(response) {
-            if(!response.credential) return;
-            try{
-                const payload = JSON.parse(atob(response.credential.split('.')[1]));
-                const user = {id:payload.sub, name:payload.name, email:payload.email, picture:payload.picture, provider:'google'};
-                setCurrentUser(user);
-                showWelcomeView(user, 'Welcome, '+user.name+'!', 'Signed in with Google — '+user.email);
-            }catch(e){showError('signInError','Google sign-in failed. Please try again.')}
-        }
+// ============================================================
+// 5. LANGUAGE BUTTON EVENTS
+// ============================================================
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+});
 
-        function setCurrentUser(user) { currentUser = user; localStorage.setItem('fikrado_user',JSON.stringify(user)); updateUserUI(user); }
-        function clearCurrentUser() { currentUser = null; localStorage.removeItem('fikrado_user'); if(googleAccounts){try{google.accounts.id.disableAutoSelect()}catch(e){}} updateUserUI(null); }
+// ============================================================
+// 6. AUTH SYSTEM (preserved from original)
+// ============================================================
+function getUsers() {
+    return JSON.parse(localStorage.getItem('fikrado_email_users') || '[]');
+}
 
-        function updateUserUI(user) {
-            const a=document.getElementById('authNavItem'),u=document.getElementById('userNavItem'),av=document.getElementById('userAvatar'),nm=document.getElementById('userName');
-            if(!user){a.style.display='block';u.style.display='none';return}
-            a.style.display='none';u.style.display='block';
-            av.textContent=user.name?user.name.charAt(0).toUpperCase():'U';
-            nm.textContent=user.name||user.email;
-        }
-        function restoreSession(){if(currentUser)updateUserUI(currentUser)}
+function setCurrentUser(user) {
+    localStorage.setItem('fikrado_current_user', JSON.stringify(user));
+}
 
-        function openModal(){
-            document.getElementById('authModal').classList.add('active');
-            document.body.style.overflow='hidden';
-            if(currentUser){
-                document.getElementById('signInView').style.display='none';
-                document.getElementById('signUpView').style.display='none';
-                document.getElementById('welcomeView').style.display='block';
-                document.getElementById('welcomeTitle').textContent='Welcome, '+currentUser.name+'!';
-                document.getElementById('welcomeSub').textContent='Signed in as '+currentUser.email;
-            }else{showSignIn()}
-        }
-        function closeModal(){document.getElementById('authModal').classList.remove('active');document.body.style.overflow=''}
-        function showSignIn(){document.getElementById('signInView').style.display='block';document.getElementById('signUpView').style.display='none';document.getElementById('welcomeView').style.display='none';document.getElementById('signInError').style.display='none'}
-        function showSignUp(){document.getElementById('signInView').style.display='none';document.getElementById('signUpView').style.display='block';document.getElementById('welcomeView').style.display='none';document.getElementById('signUpError').style.display='none'}
-        function showWelcomeView(user,t,s){
-            document.getElementById('signInView').style.display='none';
-            document.getElementById('signUpView').style.display='none';
-            document.getElementById('welcomeView').style.display='block';
-            document.getElementById('welcomeTitle').textContent=t;
-            document.getElementById('welcomeSub').textContent=s;
-            document.getElementById('welcomeAvatar').textContent=user.name?user.name.charAt(0).toUpperCase():'U';
-        }
-        function showError(id,m){const e=document.getElementById(id);e.textContent=m;e.style.display='block'}
+function getCurrentUser() {
+    const data = localStorage.getItem('fikrado_current_user');
+    return data ? JSON.parse(data) : null;
+}
 
-        function handleSignIn(){
-            const email=document.getElementById('signInEmail').value.trim();
-            const password=document.getElementById('signInPassword').value;
-            if(!email||!password){showError('signInError','Please enter email and password.');return}
-            const saved=localStorage.getItem('fikrado_email_users');
-            const users=saved?JSON.parse(saved):[];
-            const found=users.find(u=>u.email===email&&u.password===password);
-            if(found){
-                const user={name:found.name,email:found.email,provider:'email'};
-                setCurrentUser(user);
-                showWelcomeView(user,'Welcome back, '+found.name+'!','Signed in as '+found.email);
-            }else{showError('signInError','Invalid email or password. Please try again.')}
-        }
+function clearCurrentUser() {
+    localStorage.removeItem('fikrado_current_user');
+}
 
-        function handleSignUp(){
-            const name=document.getElementById('signUpName').value.trim();
-            const email=document.getElementById('signUpEmail').value.trim();
-            const password=document.getElementById('signUpPassword').value;
-            if(!name||!email||!password){showError('signUpError','Please fill in all fields.');return}
-            if(password.length<6){showError('signUpError','Password must be at least 6 characters.');return}
-            const saved=localStorage.getItem('fikrado_email_users');
-            const users=saved?JSON.parse(saved):[];
-            if(users.find(u=>u.email===email)){showError('signUpError','This email is already registered. Please sign in.');return}
-            users.push({name,email,password});
-            localStorage.setItem('fikrado_email_users',JSON.stringify(users));
-            const user={name,email,provider:'email'};
-            setCurrentUser(user);
-            showWelcomeView(user,'Welcome, '+name+'!','Account created with '+email);
-        }
+function restoreSession() {
+    const user = getCurrentUser();
+    if (user) {
+        document.getElementById('signInBtn').style.display = 'none';
+        document.getElementById('userDisplay').style.display = 'inline';
+        document.getElementById('userName').textContent = user.name || user.email;
+    }
+}
 
-        function signOut(){clearCurrentUser();closeModal();showSignIn()}
+function openModal() {
+    document.getElementById('authModal').classList.add('active');
+}
 
-        function handleNewsletter(e){
-            e.preventDefault();
-            const email=document.getElementById('newsletterEmail').value.trim();
-            if(email){
-                document.getElementById('newsletterForm').style.display='none';
-                document.getElementById('newsletterSuccess').style.display='block';
-                const subs=JSON.parse(localStorage.getItem('fikrado_newsletter')||'[]');
-                subs.push({email,date:new Date().toISOString()});
-                localStorage.setItem('fikrado_newsletter',JSON.stringify(subs));
-            }
-        }
+function closeModal() {
+    document.getElementById('authModal').classList.remove('active');
+}
 
-        function initScrollReveal(){
-            const els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
-            if('IntersectionObserver'in window){
-                const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
-                els.forEach(el=>observer.observe(el));
-            }else{els.forEach(el=>el.classList.add('visible'))}
-        }
+function showSignIn() {
+    document.getElementById('signInView').style.display = 'block';
+    document.getElementById('signUpView').style.display = 'none';
+    document.getElementById('welcomeView').style.display = 'none';
+}
 
-        function initNavbar(){
-            const navbar=document.getElementById('navbar');
-            let ticking=false;
-            window.addEventListener('scroll',()=>{
-                if(!ticking){
-                    window.requestAnimationFrame(()=>{navbar.classList.toggle('scrolled',window.scrollY>50);ticking=false});
-                    ticking=true;
-                }
+function showSignUp() {
+    document.getElementById('signInView').style.display = 'none';
+    document.getElementById('signUpView').style.display = 'block';
+    document.getElementById('welcomeView').style.display = 'none';
+}
+
+function showWelcomeView(user, title, sub) {
+    document.getElementById('signInView').style.display = 'none';
+    document.getElementById('signUpView').style.display = 'none';
+    document.getElementById('welcomeView').style.display = 'block';
+    document.getElementById('welcomeTitle').textContent = title;
+    document.getElementById('welcomeSub').textContent = sub;
+}
+
+function showError(id, msg) {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+}
+
+function handleGoogleSignIn() {
+    alert('Google Sign-In integration coming soon! For now, use email registration.');
+}
+
+function handleSignIn() {
+    const email = document.getElementById('signInEmail').value.trim();
+    const password = document.getElementById('signInPassword').value;
+    const users = getUsers();
+    const found = users.find(u => u.email === email && u.password === password);
+    if (found) {
+        setCurrentUser(found);
+        showWelcomeView(found, 'Welcome back, ' + found.name + '!', 'Signed in as ' + found.email);
+        document.getElementById('signInBtn').style.display = 'none';
+        document.getElementById('userDisplay').style.display = 'inline';
+        document.getElementById('userName').textContent = found.name;
+    } else {
+        showError('signInError', 'Invalid email or password. Please try again.');
+    }
+}
+
+function handleSignUp() {
+    const name = document.getElementById('signUpName').value.trim();
+    const email = document.getElementById('signUpEmail').value.trim();
+    const password = document.getElementById('signUpPassword').value;
+    if (!name || !email || !password) {
+        showError('signUpError', 'Please fill in all fields.');
+        return;
+    }
+    if (password.length < 6) {
+        showError('signUpError', 'Password must be at least 6 characters.');
+        return;
+    }
+    const users = getUsers();
+    if (users.find(u => u.email === email)) {
+        showError('signUpError', 'This email is already registered. Please sign in.');
+        return;
+    }
+    users.push({ name, email, password });
+    localStorage.setItem('fikrado_email_users', JSON.stringify(users));
+    const user = { name, email, provider: 'email' };
+    setCurrentUser(user);
+    showWelcomeView(user, 'Welcome, ' + name + '!', 'Account created with ' + email);
+    document.getElementById('signInBtn').style.display = 'none';
+    document.getElementById('userDisplay').style.display = 'inline';
+    document.getElementById('userName').textContent = name;
+}
+
+function signOut() {
+    clearCurrentUser();
+    closeModal();
+    showSignIn();
+    document.getElementById('signInBtn').style.display = 'inline-block';
+    document.getElementById('userDisplay').style.display = 'none';
+}
+
+// ============================================================
+// 7. NEWSLETTER
+// ============================================================
+function handleNewsletter(e) {
+    e.preventDefault();
+    const email = document.getElementById('newsletterEmail').value.trim();
+    if (email) {
+        document.getElementById('newsletterForm').style.display = 'none';
+        document.getElementById('newsletterSuccess').style.display = 'block';
+        const subs = JSON.parse(localStorage.getItem('fikrado_newsletter') || '[]');
+        subs.push({ email, date: new Date().toISOString() });
+        localStorage.setItem('fikrado_newsletter', JSON.stringify(subs));
+    }
+}
+
+// ============================================================
+// 8. NAVBAR & SCROLL REVEAL
+// ============================================================
+function initNavbar() {
+    const navbar = document.getElementById('navbar');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
+                ticking = false;
             });
+            ticking = true;
         }
+    });
+}
 
-        function initMobileNav(){
-            const toggle=document.getElementById('navToggle'),links=document.getElementById('navLinks');
-            toggle.addEventListener('click',()=>links.classList.toggle('open'));
-            links.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>links.classList.remove('open')));
-        }
+function initMobileNav() {
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(l => l.addEventListener('click', () => links.classList.remove('open')));
+}
 
-        document.addEventListener('DOMContentLoaded',()=>{
-            restoreSession();
-            initScrollReveal();
-            initNavbar();
-            initMobileNav();
-            loadGoogleAPI();
-            document.getElementById('authModal').addEventListener('click',(e)=>{if(e.target===document.getElementById('authModal'))closeModal()});
-            document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeModal()});
-            document.getElementById('signInBtn').addEventListener('click',openModal);
-            document.getElementById('signInPassword').addEventListener('keydown',(e)=>{if(e.key==='Enter')handleSignIn()});
-            document.getElementById('signUpPassword').addEventListener('keydown',(e)=>{if(e.key==='Enter')handleSignUp()});
-        });
-    </script>
+// ============================================================
+// 9. INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    restoreSession();
+    initNavbar();
+    initMobileNav();
+    applyLanguage(currentLang);
+    renderProducts();
+
+    document.getElementById('authModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('authModal')) closeModal();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    document.getElementById('signInBtn').addEventListener('click', openModal);
+    document.getElementById('signInPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSignIn(); });
+    document.getElementById('signUpPassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSignUp(); });
+});
+</script>
+
 </body>
 </html>
+    
