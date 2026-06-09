@@ -6,7 +6,6 @@
     <title>Fikrado Electronics — Premium Tech Store</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
     <style>
-        /* ===== RESET & BASE ===== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -18,13 +17,10 @@
         }
         a { text-decoration: none; color: inherit; }
         img { max-width: 100%; display: block; }
-
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #07080a; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00d4ff, #7b2ff7); border-radius: 10px; }
 
-        /* ===== BACKGROUND HERO ===== */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -63,12 +59,9 @@
             animation: fadeInUp 1.2s ease-out;
         }
 
-        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
             padding: 1.2rem 2rem;
             display: flex;
@@ -113,10 +106,8 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
             background: linear-gradient(90deg, #00d4ff, #7b2ff7);
             transition: width 0.3s ease;
             border-radius: 2px;
@@ -151,16 +142,14 @@
         }
         @media (max-width: 768px) {
             .navbar { padding: 1rem 1.2rem; }
-            .nav-links { 
-                display: none; 
-                flex-direction: column; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0; 
-                background: rgba(7,8,10,0.98); 
-                padding: 1.5rem; 
-                gap: 1.2rem; 
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(7,8,10,0.98);
+                padding: 1.5rem;
+                gap: 1.2rem;
                 border-bottom: 1px solid rgba(255,255,255,0.05);
                 backdrop-filter: blur(20px);
             }
@@ -168,60 +157,43 @@
             .nav-toggle { display: block; }
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes slideInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-        @keyframes shimmer { 
-            0% { background-position: -200% center; } 
-            100% { background-position: 200% center; } 
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
-        @keyframes rotateGlow { 
-            0% { transform: rotate(0deg); } 
-            100% { transform: rotate(360deg); } 
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        @keyframes typing { 
-            from { width: 0; } 
-            to { width: 100%; } 
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
         }
-        @keyframes blink { 
-            50% { border-color: transparent; } 
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
-        @keyframes gradientShift { 
-            0% { background-position: 0% 50%; } 
-            50% { background-position: 100% 50%; } 
-            100% { background-position: 0% 50%; } 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        @keyframes borderPulse { 
-            0%,100% { border-color: rgba(0,212,255,0.2); } 
-            50% { border-color: rgba(123,47,247,0.5); } 
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
         }
-        @keyframes particleFloat { 
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 
-            10% { opacity: 0.6; } 
-            90% { opacity: 0.6; } 
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; } 
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes ripple { 
-            0% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); } 
-            100% { box-shadow: 0 0 0 20px rgba(0,212,255,0); } 
-        }
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        @keyframes ripple {
+            0% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+            100% { box-shadow: 0 0 0 20px rgba(0,212,255,0); }
         }
 
-        /* ===== SCROLL REVEAL ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-left { opacity: 0; transform: translateX(-60px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal-left.visible { opacity: 1; transform: translateX(0); }
@@ -234,7 +206,6 @@
         .stagger-3 { transition-delay: 0.3s; }
         .stagger-4 { transition-delay: 0.4s; }
 
-        /* ===== HERO TEXT ===== */
         .hero-title {
             font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 800;
@@ -287,8 +258,6 @@
             margin-bottom: 1.5rem;
             animation: pulse 2s ease-in-out infinite;
         }
-
-        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             gap: 1rem;
@@ -342,7 +311,6 @@
             box-shadow: 0 0 30px rgba(0,212,255,0.1);
         }
 
-        /* ===== SOCIAL SECTION ===== */
         .social-section {
             padding: 6rem 2rem;
             background: linear-gradient(180deg, #07080a, #0c0e14, #07080a);
@@ -413,15 +381,8 @@
         .social-card:hover .social-icon { transform: scale(1.1) rotate(5deg); }
         .icon-instagram { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); }
         .icon-facebook { background: linear-gradient(135deg, #1877f2, #0c5fbf); }
-        .social-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.4rem;
-        }
-        .social-card .social-username {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
+        .social-card h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+        .social-card .social-username { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 1.5rem; }
         .social-link {
             display: inline-flex;
             align-items: center;
@@ -431,18 +392,13 @@
             transition: all 0.3s ease;
             font-size: 0.95rem;
         }
-        .social-link:hover {
-            gap: 1rem;
-            color: #7b2ff7;
-        }
+        .social-link:hover { gap: 1rem; color: #7b2ff7; }
         .social-link svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
         .social-link:hover svg { transform: translateX(4px); }
 
-        /* ===== FEATURES ===== */
         .features-section {
             padding: 6rem 2rem;
             background: #0a0c12;
-            position: relative;
         }
         .features-grid {
             display: grid;
@@ -477,15 +433,10 @@
             border-color: rgba(0,212,255,0.12);
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        .feature-icon {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
+        .feature-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
         .feature-item h4 { font-size: 1.15rem; margin-bottom: 0.5rem; }
         .feature-item p { color: rgba(255,255,255,0.5); font-size: 0.92rem; line-height: 1.6; }
 
-        /* ===== TESTIMONIALS ===== */
         .testimonials-section {
             padding: 6rem 2rem;
             background: #07080a;
@@ -508,8 +459,7 @@
         .testimonial-card::before {
             content: '"';
             position: absolute;
-            top: 0.5rem;
-            left: 1.2rem;
+            top: 0.5rem; left: 1.2rem;
             font-size: 3rem;
             color: rgba(0,212,255,0.1);
             font-family: Georgia, serif;
@@ -520,12 +470,7 @@
             transform: translateY(-4px);
             border-color: rgba(0,212,255,0.15);
         }
-        .testimonial-stars {
-            color: #ffd700;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-        }
+        .testimonial-stars { color: #ffd700; margin-bottom: 1rem; font-size: 1.1rem; letter-spacing: 2px; }
         .testimonial-card blockquote {
             color: rgba(255,255,255,0.7);
             font-style: italic;
@@ -547,7 +492,6 @@
         .testimonial-author strong { font-size: 0.95rem; }
         .testimonial-author span { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
 
-        /* ===== AUTH MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -580,11 +524,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .modal-box .modal-sub {
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-        }
+        .modal-box .modal-sub { color: rgba(255,255,255,0.5); margin-bottom: 2rem; font-size: 0.95rem; }
         .modal-close {
             position: absolute;
             top: 1rem; right: 1.2rem;
@@ -667,23 +607,9 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0,212,255,0.25);
         }
-        .modal-error {
-            color: #ff4757;
-            font-size: 0.85rem;
-            margin-bottom: 0.8rem;
-            display: none;
-        }
-        .modal-switch {
-            margin-top: 1.5rem;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.9rem;
-        }
-        .modal-switch a {
-            color: #00d4ff;
-            cursor: pointer;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
+        .modal-error { color: #ff4757; font-size: 0.85rem; margin-bottom: 0.8rem; display: none; }
+        .modal-switch { margin-top: 1.5rem; color: rgba(255,255,255,0.4); font-size: 0.9rem; }
+        .modal-switch a { color: #00d4ff; cursor: pointer; font-weight: 600; transition: color 0.3s ease; }
         .modal-switch a:hover { color: #7b2ff7; }
         .user-avatar {
             width: 60px; height: 60px;
@@ -698,31 +624,15 @@
             box-shadow: 0 4px 20px rgba(0,212,255,0.3);
         }
 
-        /* ===== NEWSLETTER ===== */
         .newsletter-section {
             padding: 5rem 2rem;
             background: linear-gradient(180deg, #07080a, #0c0e14);
             text-align: center;
-            position: relative;
         }
-        .newsletter-box {
-            max-width: 520px;
-            margin: 0 auto;
-        }
-        .newsletter-box h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-        .newsletter-box p {
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 2rem;
-        }
-        .newsletter-form {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+        .newsletter-box { max-width: 520px; margin: 0 auto; }
+        .newsletter-box h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .newsletter-box p { color: rgba(255,255,255,0.5); margin-bottom: 2rem; }
+        .newsletter-form { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
         .newsletter-form input {
             flex: 1;
             min-width: 200px;
@@ -735,10 +645,7 @@
             outline: none;
             transition: all 0.3s ease;
         }
-        .newsletter-form input:focus { 
-            border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0,212,255,0.08);
-        }
+        .newsletter-form input:focus { border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.08); }
         .newsletter-form button {
             padding: 0.9rem 2rem;
             border-radius: 12px;
@@ -761,7 +668,6 @@
             animation: fadeInUp 0.5s ease;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             padding: 3rem 2rem;
             background: #050608;
@@ -791,12 +697,8 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0,212,255,0.2);
         }
-        .footer p {
-            color: rgba(255,255,255,0.3);
-            font-size: 0.85rem;
-        }
+        .footer p { color: rgba(255,255,255,0.3); font-size: 0.85rem; }
 
-        /* ===== USER GREETING ===== */
         .user-greeting {
             display: flex;
             align-items: center;
@@ -817,7 +719,6 @@
             font-weight: 700;
         }
 
-        /* ===== PARTICLES ===== */
         .particles {
             position: fixed;
             inset: 0;
@@ -849,17 +750,6 @@
         .particle:nth-child(14) { left: 30%; animation-duration: 22s; animation-delay: 0.5s; width: 2px; height: 2px; }
         .particle:nth-child(15) { left: 70%; animation-duration: 16s; animation-delay: 4.5s; background: #7b2ff7; }
 
-        /* ===== LOADING SPINNER (for OAuth) ===== */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px; height: 20px;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 600px) {
             .hero { padding: 1rem; }
             .social-grid { grid-template-columns: 1fr; }
@@ -872,26 +762,14 @@
 </head>
 <body>
 
-    <!-- ===== PARTICLES BACKGROUND ===== -->
     <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
     </div>
 
-    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <div class="nav-logo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -917,7 +795,6 @@
         </ul>
     </nav>
 
-    <!-- ===== HERO SECTION ===== -->
     <section class="hero" id="home">
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -942,7 +819,6 @@
         </div>
     </section>
 
-    <!-- ===== FEATURES SECTION ===== -->
     <section class="features-section" id="features">
         <h2 class="section-title reveal">Why Choose Us</h2>
         <p class="section-subtitle reveal stagger-1">We deliver excellence, every single time</p>
@@ -970,12 +846,10 @@
         </div>
     </section>
 
-    <!-- ===== SOCIAL / CONNECT SECTION ===== -->
     <section class="social-section" id="connect">
         <h2 class="section-title reveal">Connect With Us</h2>
         <p class="section-subtitle reveal stagger-1">Follow us on social media and stay updated</p>
         <div class="social-grid">
-            <!-- Instagram -->
             <div class="social-card reveal-left stagger-1">
                 <div class="social-card-inner">
                     <div class="social-icon icon-instagram">
@@ -995,7 +869,6 @@
                     </a>
                 </div>
             </div>
-            <!-- Facebook -->
             <div class="social-card reveal-right stagger-2">
                 <div class="social-card-inner">
                     <div class="social-icon icon-facebook">
@@ -1016,7 +889,6 @@
         </div>
     </section>
 
-    <!-- ===== TESTIMONIALS ===== -->
     <section class="testimonials-section" id="testimonials">
         <h2 class="section-title reveal">What Our Customers Say</h2>
         <p class="section-subtitle reveal stagger-1">Trusted by hundreds of customers across Somalia</p>
@@ -1057,7 +929,6 @@
         </div>
     </section>
 
-    <!-- ===== NEWSLETTER ===== -->
     <section class="newsletter-section" id="newsletter">
         <div class="newsletter-box reveal">
             <h2>Stay Updated</h2>
@@ -1070,7 +941,6 @@
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="footer-social">
             <a href="https://instagram.com/ilyas_yare45" target="_blank" aria-label="Instagram">
@@ -1102,18 +972,14 @@
         <p>© 2026 Fikrado Electronics. All rights reserved. | Premium Tech Store | Mogadishu, Somalia</p>
     </footer>
 
-    <!-- ===== AUTH MODAL ===== -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-box" id="modalBox">
             <button class="modal-close" onclick="closeModal()">✕</button>
 
-            <!-- SIGN IN VIEW -->
             <div id="signInView">
                 <div class="user-avatar">🔐</div>
                 <h2>Welcome Back</h2>
                 <p class="modal-sub">Sign in to your Fikrado Electronics account</p>
-
-                <!-- Google OAuth Button -->
                 <button class="google-btn" id="googleSignInBtn">
                     <svg viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
@@ -1123,7 +989,6 @@
                     </svg>
                     Continue with Google
                 </button>
-
                 <div class="divider">or continue with email</div>
                 <div class="modal-error" id="signInError">Invalid credentials. Please try again.</div>
                 <input type="email" class="modal-input" placeholder="Email address" id="signInEmail" autocomplete="email" />
@@ -1132,12 +997,10 @@
                 <p class="modal-switch">Don't have an account? <a onclick="showSignUp()">Create one</a></p>
             </div>
 
-            <!-- SIGN UP VIEW -->
             <div id="signUpView" style="display:none;">
                 <div class="user-avatar">✨</div>
                 <h2>Join Fikrado</h2>
                 <p class="modal-sub">Create your account to start exploring</p>
-
                 <button class="google-btn" id="googleSignUpBtn">
                     <svg viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
@@ -1147,7 +1010,6 @@
                     </svg>
                     Continue with Google
                 </button>
-
                 <div class="divider">or sign up with email</div>
                 <div class="modal-error" id="signUpError">Please fill in all fields.</div>
                 <input type="text" class="modal-input" placeholder="Full Name" id="signUpName" autocomplete="name" />
@@ -1157,7 +1019,6 @@
                 <p class="modal-switch">Already have an account? <a onclick="showSignIn()">Sign in</a></p>
             </div>
 
-            <!-- WELCOME VIEW (after successful auth) -->
             <div id="welcomeView" style="display:none;">
                 <div class="user-avatar" id="welcomeAvatar">👋</div>
                 <h2 id="welcomeTitle">Welcome!</h2>
@@ -1169,19 +1030,10 @@
     </div>
 
     <script>
-        // =====================================================
-        // GOOGLE OAUTH — Full Working Implementation
-        // =====================================================
-        
-        // 🔴 IMPORTANT: Replace this with YOUR Google OAuth Client ID
-        // Get one at: https://console.cloud.google.com/apis/credentials
-        // Add https://ilyasabdi93.github.io to "Authorized JavaScript origins"
-        const GOOGLE_CLIENT_ID = '293057151720-j902kohmducgbernpo3su9st1rcf3fc0.apps.googleusercontent.com.';
-        
+        const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
         let googleAccounts = null;
         let currentUser = JSON.parse(localStorage.getItem('fikrado_user')) || null;
 
-        // Load Google Identity Services library
         function loadGoogleAPI() {
             const script = document.createElement('script');
             script.src = 'https://accounts.google.com/gsi/client';
@@ -1191,18 +1043,12 @@
                 googleAccounts = google.accounts;
                 initializeGoogleSignIn();
             };
-            script.onerror = () => {
-                console.warn('Google API failed to load. Email auth still works.');
-            };
+            script.onerror = () => console.warn('Google API failed to load. Email auth still works.');
             document.head.appendChild(script);
         }
 
         function initializeGoogleSignIn() {
-            if (!googleAccounts || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
-                console.log('Google OAuth: Set your Client ID in GOOGLE_CLIENT_ID');
-                return;
-            }
-
+            if (!googleAccounts || GOOGLE_CLIENT_ID === '293057151720-j902kohmducgbernpo3su9st1rcf3fc0.apps.googleusercontent.com') return;
             try {
                 google.accounts.id.initialize({
                     client_id: GOOGLE_CLIENT_ID,
@@ -1210,68 +1056,24 @@
                     auto_select: false,
                     cancel_on_tap_outside: true,
                 });
-
-                // Render Google button on sign in view
-                google.accounts.id.renderButton(
-                    document.getElementById('googleSignInBtn'),
-                    { type: 'standard', shape: 'pill', theme: 'outline', text: 'signin_with', size: 'large', width: '100%' }
-                );
-
-                // Render Google button on sign up view
-                google.accounts.id.renderButton(
-                    document.getElementById('googleSignUpBtn'),
-                    { type: 'standard', shape: 'pill', theme: 'outline', text: 'signup_with', size: 'large', width: '100%' }
-                );
-
-                // Click handlers
-                document.getElementById('googleSignInBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    google.accounts.id.prompt();
-                });
-                
-                document.getElementById('googleSignUpBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    google.accounts.id.prompt();
-                });
-
-                console.log('Google OAuth initialized successfully');
-            } catch (err) {
-                console.error('Google OAuth init error:', err);
-            }
+                google.accounts.id.renderButton(document.getElementById('googleSignInBtn'),
+                    { type: 'standard', shape: 'pill', theme: 'outline', text: 'signin_with', size: 'large', width: '100%' });
+                google.accounts.id.renderButton(document.getElementById('googleSignUpBtn'),
+                    { type: 'standard', shape: 'pill', theme: 'outline', text: 'signup_with', size: 'large', width: '100%' });
+                document.getElementById('googleSignInBtn').addEventListener('click', (e) => { e.preventDefault(); google.accounts.id.prompt(); });
+                document.getElementById('googleSignUpBtn').addEventListener('click', (e) => { e.preventDefault(); google.accounts.id.prompt(); });
+            } catch(e) { console.error('Google OAuth init error:', e); }
         }
 
-        // Handle the credential response from Google
         function handleGoogleCredentialResponse(response) {
-            if (!response.credential) {
-                console.error('No credential received from Google');
-                return;
-            }
-
+            if (!response.credential) return;
             try {
                 const payload = JSON.parse(atob(response.credential.split('.')[1]));
-                
-                const user = {
-                    id: payload.sub,
-                    name: payload.name,
-                    email: payload.email,
-                    picture: payload.picture,
-                    provider: 'google',
-                    token: response.credential
-                };
-
+                const user = { id: payload.sub, name: payload.name, email: payload.email, picture: payload.picture, provider: 'google' };
                 setCurrentUser(user);
                 showWelcomeView(user, `Welcome, ${user.name}!`, `Signed in with Google — ${user.email}`);
-                console.log('Google OAuth success:', user.email);
-
-            } catch (err) {
-                console.error('Failed to decode Google credential:', err);
-                showError('signInError', 'Google sign-in failed. Please try again.');
-            }
+            } catch(e) { showError('signInError', 'Google sign-in failed. Please try again.'); }
         }
-
-        // =====================================================
-        // USER SESSION MANAGEMENT
-        // =====================================================
 
         function setCurrentUser(user) {
             currentUser = user;
@@ -1282,58 +1084,33 @@
         function clearCurrentUser() {
             currentUser = null;
             localStorage.removeItem('fikrado_user');
-            if (googleAccounts) {
-                try { google.accounts.id.disableAutoSelect(); } catch(e) {}
-            }
+            if (googleAccounts) { try { google.accounts.id.disableAutoSelect(); } catch(e) {} }
             updateUserUI(null);
         }
 
         function updateUserUI(user) {
             const authItem = document.getElementById('authNavItem');
             const userItem = document.getElementById('userNavItem');
-            const greeting = document.getElementById('userGreeting');
             const avatar = document.getElementById('userAvatar');
             const nameEl = document.getElementById('userName');
-            const signInBtn = document.getElementById('signInBtn');
-
-            if (!user) {
-                authItem.style.display = 'block';
-                userItem.style.display = 'none';
-                signInBtn.textContent = 'Sign In';
-                return;
-            }
-
-            authItem.style.display = 'none';
-            userItem.style.display = 'block';
-            
-            const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
-            avatar.textContent = initial;
+            if (!user) { authItem.style.display = 'block'; userItem.style.display = 'none'; return; }
+            authItem.style.display = 'none'; userItem.style.display = 'block';
+            avatar.textContent = user.name ? user.name.charAt(0).toUpperCase() : 'U';
             nameEl.textContent = user.name || user.email;
         }
 
-        function restoreSession() {
-            if (currentUser) {
-                updateUserUI(currentUser);
-            }
-        }
-
-        // =====================================================
-        // MODAL CONTROLS
-        // =====================================================
+        function restoreSession() { if (currentUser) updateUserUI(currentUser); }
 
         function openModal() {
             document.getElementById('authModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            
             if (currentUser) {
                 document.getElementById('signInView').style.display = 'none';
                 document.getElementById('signUpView').style.display = 'none';
                 document.getElementById('welcomeView').style.display = 'block';
                 document.getElementById('welcomeTitle').textContent = `Welcome, ${currentUser.name}!`;
                 document.getElementById('welcomeSub').textContent = `Signed in as ${currentUser.email}`;
-            } else {
-                showSignIn();
-            }
+            } else { showSignIn(); }
         }
 
         function closeModal() {
@@ -1350,7 +1127,7 @@
 
         function showSignUp() {
             document.getElementById('signInView').style.display = 'none';
-
+            document.getElementById('signUpView').style.display = 'block';
             document.getElementById('welcomeView').style.display = 'none';
             document.getElementById('signUpError').style.display = 'none';
         }
@@ -1361,82 +1138,45 @@
             document.getElementById('welcomeView').style.display = 'block';
             document.getElementById('welcomeTitle').textContent = title;
             document.getElementById('welcomeSub').textContent = sub;
-            const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
-            document.getElementById('welcomeAvatar').textContent = initial;
+            document.getElementById('welcomeAvatar').textContent = user.name ? user.name.charAt(0).toUpperCase() : 'U';
         }
 
         function showError(elId, msg) {
             const el = document.getElementById(elId);
-            el.textContent = msg;
-            el.style.display = 'block';
+            el.textContent = msg; el.style.display = 'block';
         }
-
-        // =====================================================
-        // EMAIL/PASSWORD AUTH
-        // =====================================================
 
         function handleSignIn() {
             const email = document.getElementById('signInEmail').value.trim();
             const password = document.getElementById('signInPassword').value;
-
-            if (!email || !password) {
-                showError('signInError', 'Please enter email and password.');
-                return;
-            }
-
+            if (!email || !password) { showError('signInError', 'Please enter email and password.'); return; }
             const saved = localStorage.getItem('fikrado_email_users');
             const users = saved ? JSON.parse(saved) : [];
             const found = users.find(u => u.email === email && u.password === password);
-
             if (found) {
                 const user = { name: found.name, email: found.email, provider: 'email' };
                 setCurrentUser(user);
                 showWelcomeView(user, `Welcome back, ${found.name}!`, `Signed in as ${found.email}`);
-            } else {
-                showError('signInError', 'Invalid email or password. Please try again.');
-            }
+            } else { showError('signInError', 'Invalid email or password. Please try again.'); }
         }
 
         function handleSignUp() {
             const name = document.getElementById('signUpName').value.trim();
             const email = document.getElementById('signUpEmail').value.trim();
             const password = document.getElementById('signUpPassword').value;
-
-            if (!name || !email || !password) {
-                showError('signUpError', 'Please fill in all fields.');
-                return;
-            }
-
-            if (password.length < 6) {
-                showError('signUpError', 'Password must be at least 6 characters.');
-                return;
-            }
-
+            if (!name || !email || !password) { showError('signUpError', 'Please fill in all fields.'); return; }
+            if (password.length < 6) { showError('signUpError', 'Password must be at least 6 characters.'); return; }
             const saved = localStorage.getItem('fikrado_email_users');
             const users = saved ? JSON.parse(saved) : [];
-
-            if (users.find(u => u.email === email)) {
-                showError('signUpError', 'This email is already registered. Please sign in.');
-                return;
-            }
-
+            if (users.find(u => u.email === email)) { showError('signUpError', 'This email is already registered. Please sign in.'); return; }
             users.push({ name, email, password });
             localStorage.setItem('fikrado_email_users', JSON.stringify(users));
-
             const user = { name, email, provider: 'email' };
             setCurrentUser(user);
             showWelcomeView(user, `Welcome, ${name}!`, `Account created with ${email}`);
         }
 
-        function signOut() {
-            clearCurrentUser();
-            closeModal();
-            showSignIn();
-        }
-
-        // =====================================================
-        // NEWSLETTER
-        // =====================================================
+        function signOut() { clearCurrentUser(); closeModal(); showSignIn(); }
 
         function handleNewsletter(e) {
             e.preventDefault();
@@ -1444,105 +1184,39 @@
             if (email) {
                 document.getElementById('newsletterForm').style.display = 'none';
                 document.getElementById('newsletterSuccess').style.display = 'block';
-
                 const subs = JSON.parse(localStorage.getItem('fikrado_newsletter') || '[]');
                 subs.push({ email, date: new Date().toISOString() });
                 localStorage.setItem('fikrado_newsletter', JSON.stringify(subs));
             }
         }
 
-        // =====================================================
-        // SCROLL REVEAL ANIMATIONS
-        // =====================================================
-
         function initScrollReveal() {
             const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
                 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
                 els.forEach(el => observer.observe(el));
-            } else {
-                els.forEach(el => el.classList.add('visible'));
-            }
+            } else { els.forEach(el => el.classList.add('visible')); }
         }
-
-        // =====================================================
-        // NAVBAR SHRINK ON SCROLL
-        // =====================================================
 
         function initNavbar() {
             const navbar = document.getElementById('navbar');
             let ticking = false;
-
             window.addEventListener('scroll', () => {
                 if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        navbar.classList.toggle('scrolled', window.scrollY > 50);
-                        ticking = false;
-                    });
+                    window.requestAnimationFrame(() => { navbar.classList.toggle('scrolled', window.scrollY > 50); ticking = false; });
                     ticking = true;
                 }
             });
         }
 
-        // =====================================================
-        // MOBILE NAV TOGGLE
-        // =====================================================
-
         function initMobileNav() {
             const toggle = document.getElementById('navToggle');
             const links = document.getElementById('navLinks');
-
-            toggle.addEventListener('click', () => {
-                links.classList.toggle('open');
-            });
-
-            links.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => links.classList.remove('open'));
-            });
+            toggle.addEventListener('click', () => links.classList.toggle('open'));
+            links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => links.classList.remove('open')));
         }
-
-        // =====================================================
-        // INIT — Run everything
-        // =====================================================
 
         document.addEventListener('DOMContentLoaded', () => {
             restoreSession();
-            initScrollReveal();
-            initNavbar();
-            initMobileNav();
-            loadGoogleAPI();
-
-            // Close modal on overlay click
-            document.getElementById('authModal').addEventListener('click', (e) => {
-                if (e.target === document.getElementById('authModal')) closeModal();
-            });
-
-            // Close modal on Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeModal();
-            });
-
-            // Sign In button in navbar
-            document.getElementById('signInBtn').addEventListener('click', openModal);
-
-            // Enter key support for sign in
-            document.getElementById('signInPassword').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') handleSignIn();
-            });
-
-            // Enter key support for sign up
-            document.getElementById('signUpPassword').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') handleSignUp();
-            });
-        });
-    </script>
-</body>
-</html>
